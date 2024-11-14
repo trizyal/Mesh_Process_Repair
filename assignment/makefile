@@ -1,6 +1,6 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Itriangle_renderer
+CXXFLAGS = -std=c++11
 
 # Target executable
 TARGET = face2faceindex
