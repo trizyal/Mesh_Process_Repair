@@ -46,44 +46,7 @@ class TriangleMesh
         std::cout << "Object Name: " << this->objName << std::endl; 
     }
 
-    int saveFile()
-    {
-        std::string filename = "output/" + this->objName + ".face";
-
-        // create the output directory if it doesn't exist
-        std::string output_dir = "output";
-        std::string command = "mkdir -p " + output_dir;
-        system(command.c_str());
-
-        std::ofstream file(filename.c_str());
-        if (!file.is_open())
-        {
-            std::cerr << "Error: could not open file " << filename << std::endl;
-            return 1;
-        }
-
-        file << "# University of Leeds 2024-2025" << std::endl;
-        file << "# COMP 5893M Assignment 1" << std::endl;
-        file << "# Student Name: Tejaswa Rizyal" << std::endl;
-        file << "# Student Number: 201484983" << std::endl;
-        file << "#"<< std::endl;
-        file << "# Object Name: " << this->objName << std::endl;
-        file << "# Vertices: " << this->numVertices << std::endl;
-        file << "#" << std::endl;
-
-        for (int i = 0; i < this->numVertices; i++)
-        {
-            file << "Vertex " << i << " " << this->vertices[i].x << " " << this->vertices[i].y << " " << this->vertices[i].z << std::endl;
-        }
-
-        for (int i = 0; i < this->numFaces; i++)
-        {
-            file << "Face " << i << " " << i << std::endl;
-        }
-
-        file.close();
-        return 0;
-    }
+    int saveFile();
 
 };
 
