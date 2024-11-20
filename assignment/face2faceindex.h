@@ -11,6 +11,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <array>
 
 class TriangleMesh
 {
@@ -21,7 +22,7 @@ class TriangleMesh
     int numFaces;
 
     std::vector<Cartesian3> vertices;
-    std::vector<Cartesian3> faces;
+    std::vector<std::array<int, 3>> faces;
 
     // Default constructor for TriangleMesh
     TriangleMesh()

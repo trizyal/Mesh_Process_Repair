@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <array>
 
 int main(int argc, char *argv[])
 {
@@ -38,14 +39,60 @@ int main(int argc, char *argv[])
 
     // store the vertices
     std::vector<Cartesian3> vertices;
-    std::vector<Cartesian3> faces;
+    // std::vector<Cartesian3> faces;
+    std::vector<std::array<int, 3>> faces;
+
     for (int i = 0; i < numTriangles; i++)
     {
         std::getline(file, line);
         std::istringstream iss(line);
         float x, y, z;
         iss >> x >> y >> z;
-        vertices.push_back(Cartesian3(x, y, z));
+        // vertices.push_back(Cartesian3(x, y, z));
+        Cartesian3 vertex(x, y, z);
+
+        // print the vertex
+        // std::cout << "Vertex " << i << ": " << vertex.x << " " << vertex.y << " " << vertex.z << std::endl;
+
+        vertices.push_back(vertex);
+
+        std::array<int, 3> face;
+        
+        // the first 3 vertices are the first face
+        if (faces.size() == 0)
+        {
+            if (vertices.size() == 3)
+            {
+                face[0] = 0;
+                face[1] = 1;
+                face[2] = 2;
+                faces.push_back(face);
+            }
+        }
+        else 
+        {
+            // find the index of the vertex in the vertices vector
+            int index = -1;
+            for (int j = 0; j < vertices.size(); j++)
+            {
+                if (vertices[j] == vertex)
+                {
+                    index = j;
+                    break;
+                }
+            }
+            if (i % 3 == 1)
+                face[0] = index;
+            else if (i % 3 == 2)
+                face[1] = index;
+            else if (i % 3 == 0)
+            {
+                face[2] = index;
+                faces.push_back(face);
+            }
+        }
+        
+        
     }
 
     // objName will be the file name without the extension and the path
@@ -99,7 +146,7 @@ int TriangleMesh::saveFile()
 
     for (int i = 0; i < this->numFaces; i++)
     {
-        file << "Face " << i << " " << this->numFaces << std::endl;
+        file << "Face " << i << " " << this->faces[i][0] << " " << this->faces[i][1] << " " << this->faces[i][2] << std::endl;
     }
 
     file.close();

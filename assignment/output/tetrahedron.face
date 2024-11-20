@@ -10,7 +10,3 @@ Vertex 0 -1 -1 -1
 Vertex 1 1 -1 1
 Vertex 2 -1 1 1
 Vertex 3 -1 1 1
-Face 0 4
-Face 1 4
-Face 2 4
-Face 3 4
