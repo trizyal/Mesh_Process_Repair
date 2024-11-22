@@ -13,6 +13,11 @@
 #include <fstream>
 #include <array>
 
+struct Faces3
+{
+    int face[3];
+};
+
 class TriangleMesh
 {
     public:
@@ -22,23 +27,26 @@ class TriangleMesh
     int numFaces;
 
     std::vector<Cartesian3> vertices;
-    std::vector<std::array<int, 3>> faces;
+    std::vector<Faces3> faces;
 
     // Default constructor for TriangleMesh
     TriangleMesh()
     {
         this->numTriangles = 0;
         this->numVertices = 0;
+        this->numFaces = 0;
     }
 
     // Constructor for TriangleMesh
-    TriangleMesh(std::string objName, int numTriangles, std::vector<Cartesian3> vertices)
+    TriangleMesh(std::string objName, int numTriangles, std::vector<Cartesian3> vertices, std::vector<Faces3> faces)
     {
         this->objName = objName;
         this->numTriangles = numTriangles;
         this->numVertices = vertices.size();
         this->vertices = vertices;
         this->numFaces = numTriangles;
+        this->faces = faces;
+
     }
 
     // print the vertices in a file
@@ -47,7 +55,7 @@ class TriangleMesh
         std::cout << "Object Name: " << this->objName << std::endl; 
     }
 
-    int saveFile();
+    int saveFile() const;
 
 };
 

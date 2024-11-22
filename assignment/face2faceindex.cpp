@@ -7,6 +7,8 @@
 #include <fstream>
 #include <sstream>
 #include <array>
+#include <vector>
+#include <algorithm>
 
 int main(int argc, char *argv[])
 {
@@ -40,7 +42,7 @@ int main(int argc, char *argv[])
     // store the vertices
     std::vector<Cartesian3> vertices;
     // std::vector<Cartesian3> faces;
-    std::vector<std::array<int, 3>> faces;
+    std::vector<Faces3> faces;
 
     for (int i = 0; i < numTriangles; i++)
     {
@@ -49,6 +51,7 @@ int main(int argc, char *argv[])
         float x, y, z;
         iss >> x >> y >> z;
         // vertices.push_back(Cartesian3(x, y, z));
+        
         Cartesian3 vertex(x, y, z);
 
         // print the vertex
@@ -56,39 +59,40 @@ int main(int argc, char *argv[])
 
         vertices.push_back(vertex);
 
-        std::array<int, 3> face;
+        Faces3 f;
         
         // the first 3 vertices are the first face
-        if (faces.size() == 0)
+        if (faces.empty() == true)
         {
             if (vertices.size() == 3)
             {
-                face[0] = 0;
-                face[1] = 1;
-                face[2] = 2;
-                faces.push_back(face);
+                f.face[0] = 0;
+                f.face[1] = 1;
+                f.face[2] = 2;
+                faces.push_back(f);
             }
         }
         else 
         {
-            // find the index of the vertex in the vertices vector
-            int index = -1;
-            for (int j = 0; j < vertices.size(); j++)
+            auto pos = std::find(vertices.begin(), vertices.end(), vertex);
+            if (pos != vertices.end())
             {
-                if (vertices[j] == vertex)
+                auto index = pos - vertices.begin();
+
+                if (i % 3 == 0)
                 {
-                    index = j;
-                    break;
+                    f.face[0] = index;
                 }
-            }
-            if (i % 3 == 1)
-                face[0] = index;
-            else if (i % 3 == 2)
-                face[1] = index;
-            else if (i % 3 == 0)
-            {
-                face[2] = index;
-                faces.push_back(face);
+                else if (i % 3 == 1)
+                {
+                    f.face[1] = index;
+                }
+                else if (i % 3 == 2)
+                {
+                    f.face[2] = index;
+                    faces.push_back(f);
+                }
+                
             }
         }
         
@@ -100,7 +104,7 @@ int main(int argc, char *argv[])
     objNameStr = objNameStr.substr(0, objNameStr.find_last_of("."));
 
     // create a TriangleMesh object
-    TriangleMesh mesh(objNameStr, numTriangles, vertices);
+    TriangleMesh mesh(objNameStr, numTriangles, vertices, faces);
 
     int check = mesh.saveFile();
     if (check == 1)
@@ -114,8 +118,10 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-int TriangleMesh::saveFile()
+int TriangleMesh::saveFile() const
 {
+    std::cout<<"reached saveFile"<<std::endl;
+
     std::string filename = "output/" + this->objName + ".face";
 
     // create the output directory if it doesn't exist
@@ -146,7 +152,7 @@ int TriangleMesh::saveFile()
 
     for (int i = 0; i < this->numFaces; i++)
     {
-        file << "Face " << i << " " << this->faces[i][0] << " " << this->faces[i][1] << " " << this->faces[i][2] << std::endl;
+        file << "Face " << i << " " << this->faces[i].face[0] << " " << this->faces[i].face[1] << " " << this->faces[i].face[2] << std::endl;
     }
 
     file.close();
