@@ -37,10 +37,11 @@ int main(int argc, char *argv[])
     mesh.objName = obj_name;
 
     // mesh.printFaceFile();
-    return 0;
+    // mesh.printDiredgeFile();
+    mesh.printDirectedEdges();
 
 
-    // we calculate the edges and directed edges and otherHalfs and store them in the TriangleMesh objectss
+    // we calculate the edges and directed edges and otherHalfs and store them in the Mesh objects
 
     // for manifold testing
     // A surface mesh is 2-manifold iff:
@@ -48,4 +49,43 @@ int main(int argc, char *argv[])
     // 2. no pinch points at vertices
     //     - i.e. single cycle around each vertex
     // 3. no self-intersections
+
+    // print non manifold edges
+    std::vector<int> nonManifoldEdges = mesh.edgeManifoldTest();
+    std::vector<int> nonManifoldVertices = mesh.vertexManifoldTest();
+/*
+    if (nonManifoldEdges.empty())
+        std::cout << "All edges is 2-manifold" << std::endl;
+    else
+    {
+        for (int Edge : nonManifoldEdges)
+        {
+            std::cout << "Edge " << Edge << std::endl;
+        }
+    }
+    return 0;
+*/
+    if (nonManifoldEdges.empty() && nonManifoldVertices.empty())
+    {
+        std::cout << "The mesh is 2-manifold" << std::endl;
+    }
+    else
+    {
+        std::cout << "The mesh is not 2-manifold" << std::endl;
+        std::cout << "The following edges are non-manifold:" << std::endl;
+        for (int Edge : nonManifoldEdges)
+        {
+            std::cout << "Edge " << Edge << std::endl;
+        }
+
+        std::cout << "The following vertices are non-manifold:" << std::endl;
+        for (int Vertex : nonManifoldVertices)
+        {
+            std::cout << "Vertex " << Vertex << std::endl;
+        }
+    }
+
+
+
+    return 0;
 }

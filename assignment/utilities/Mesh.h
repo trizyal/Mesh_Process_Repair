@@ -22,6 +22,7 @@ struct Faces
 struct DirectedEdges
 {
     int from, to;
+    int face;
 };
 
 class Mesh {
@@ -57,9 +58,13 @@ class Mesh {
         numFaces = 0;
     }
 
-    // function to read a file and populate the mesh object
-    // returns 0 if successful, 1 otherwise
+    // function to read a .tri file and populate the mesh object
     void readTriFile(std::ifstream input_file);
+
+
+    // TODO: implement the following function
+    // function to read a .face file and populate the mesh object
+    void readFaceFile(std::ifstream input_file);
 
     // function to check if the vertex exists in vertices
     // if it does return the index
@@ -67,11 +72,57 @@ class Mesh {
     int findVertex(Cartesian3 vertex);
 
     // populate the directedEdges vector
+    // for each face, create 3 directed edges
     void computeDirectedEdges();
 
+    // populate the firstDirectedEdges vector
+    // for each vertex, find the first directed edge
+    // stores the index for of the edge in directedEdges for each implicit vertex
+    void computeFirstDirectedEdges();
+
+    // populate the otherHalfs vector
+    // for each edge, find the other half
+    // stores the index for of the edge in directedEdges for each implicit edge
+    void computeOtherHalfs();
+
+
+    // ----------------- MANIFOLD TESTING FUNCTIONS -----------------
+
+    // function to loop through all the edges and check if they have exactly 2 incident faces
+    std::vector<int> edgeManifoldTest();
+
+    // counts the faces this edge exists in
+    int countIncidentFaces(int edgeIndex);
+
+    // function to loop through all the vertices and check if they have exactly 1 cycle
+    std::vector<int> vertexManifoldTest();
+
+    // function to count the number of cycles for a given vertex
+    int countCycles(int vertexIndex);
+
+    int countEdges(int vertexIndex);
+
+    // function to get the directed edges from the vertex
+    std::vector<DirectedEdges> getConnectedEdges(int vertexIndex);
+
+
+    // ----------------- PRINT FUNCTIONS -----------------
     // std print for console
     // does what .face file should look like
-    void printFaceFile() const;
+    void printFaceFile();
+
+    // std print for console
+    // does what .diredge file should look like
+    void printDiredgeFile();
+
+
+    void printDirectedEdges()
+    {
+        for (DirectedEdges edge : directedEdges)
+        {
+            std::cout << "From: " << edge.from << " To: " << edge.to << " Face: " << edge.face << std::endl;
+        }
+    }
 
 };
 
