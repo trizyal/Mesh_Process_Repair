@@ -50,6 +50,59 @@ void Mesh::readTriFile(std::ifstream input_file)
 }
 
 
+void Mesh::readFaceFile(std::ifstream input_file)
+{
+    std::string line;
+
+    int numVertices = 0;
+    int numFaces = 0;
+
+    while (std::getline(input_file, line))
+    {
+        // check if the line starts with the word "Vertex"
+        if (line.find("Vertex") == 0)
+        {
+            // Vertex 1: 0 0 0
+            // read the numbers after the colon
+            std::istringstream iss(line);
+            // skip till the colon
+            iss.ignore(256, ':');
+            Cartesian3 vertex;
+            iss >> vertex.x >> vertex.y >> vertex.z;
+            vertices.push_back(vertex);
+            numVertices++;
+        }
+
+        // check if the line starts with the word "Face"
+        else if (line.find("Face") == 0)
+        {
+            // Face 1: 0 1 2
+            // read the numbers after the colon
+            std::istringstream iss(line);
+            // skip till the colon
+            iss.ignore(256, ':');
+            Faces face{};
+            iss >> face.face[0] >> face.face[1] >> face.face[2];
+            faces.push_back(face);
+            numFaces++;
+        }
+    }
+
+    this->numTriangles = numFaces;
+    this->numUniqueVertices = numVertices;
+    this->numFaces = numFaces;
+
+    std::cout << "File read successfully" << std::endl;
+    computeDirectedEdges();
+    std::cout << "Directed Edges computed successfully" << std::endl;
+    computeFirstDirectedEdges();
+    std::cout << "First Directed Edges computed successfully" << std::endl;
+    computeOtherHalfs();
+    std::cout << "Other Halfs computed successfully" << std::endl;
+}
+
+
+
 int Mesh::findVertex(Cartesian3 vertex)
 {
     // find the index of the vertex in the vertices vector
