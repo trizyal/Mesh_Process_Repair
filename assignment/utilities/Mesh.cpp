@@ -5,6 +5,7 @@
 #include "Mesh.h"
 
 #include <algorithm>
+#include <assert.h>
 #include <iomanip>
 
 void Mesh::readTriFile(std::ifstream input_file)
@@ -166,14 +167,11 @@ std::vector<int> Mesh::edgeManifoldTest()
 int Mesh::countEdges(int vertexIndex)
 {
     int count = 0;
-    std::cout<<vertexIndex<<std::endl;
-    for (int i = 0; i < this->vertices.size(); i++)
+    for (int i = 0; i < this->directedEdges.size(); i++)
     {
-        std::cout<<vertexIndex<<std::endl;
-        if (this->directedEdges[i].to == vertexIndex || this->directedEdges[i].from == vertexIndex)
+        if (this->directedEdges[i].from == vertexIndex)
         {
             count++;
-            std::cout << "vertex " << vertexIndex << " edges " << count << std::endl;
         }
     }
 
@@ -184,7 +182,7 @@ int Mesh::countEdges(int vertexIndex)
 std::vector<DirectedEdges> Mesh::getConnectedEdges(int vertexIndex)
 {
     std::vector<DirectedEdges> connectedEdges;
-    for (int i = 0; i < this->vertices.size(); i++)
+    for (int i = 0; i < this->directedEdges.size(); i++)
     {
         if (this->directedEdges[i].from == vertexIndex)
             connectedEdges.push_back(this->directedEdges[i]);
@@ -193,12 +191,102 @@ std::vector<DirectedEdges> Mesh::getConnectedEdges(int vertexIndex)
 }
 
 
+std::vector<int> Mesh::getConnectedEdgesIndices(int vertexIndex)
+{
+    std::vector<int> connectedEdges;
+    for (int i = 0; i < this->directedEdges.size(); i++)
+    {
+        if (this->directedEdges[i].from == vertexIndex)
+            connectedEdges.push_back(i);
+    }
+    return connectedEdges;
+}
+
+int Mesh::getEdgeIndex(int from, int to)
+{
+    for (int i = 0; i < this->directedEdges.size(); i++)
+    {
+        if (this->directedEdges[i].from == from && this->directedEdges[i].to == to)
+            return i;
+    }
+    return -1;
+}
 
 
 int Mesh::countCycles(int vertexIndex)
 {
-    int count = countEdges(vertexIndex);
-    return 1;
+    int cycles = 0;
+
+    int countConnectedEdges = countEdges(vertexIndex);
+    if (countConnectedEdges == 0)
+    {
+        return 0;
+    }
+
+    std::vector<DirectedEdges> connectedEdges = getConnectedEdges(vertexIndex);
+    std::vector<int> connectedEdgesIndices = getConnectedEdgesIndices(vertexIndex);
+
+    // now that we have the connected edges
+    // we can count cycles
+    // we will start from the first edge
+
+    DirectedEdges firstEdge = connectedEdges[0];
+    int firstEdgeIndex = connectedEdgesIndices[0];
+    int firstOutGoingVertex = firstEdge.to;
+    int faceIndex = firstEdge.face;
+
+    Faces currentFace = this->faces[faceIndex];
+
+    int nextVertex = firstOutGoingVertex; // for now
+
+    for (int vertex : currentFace.face)
+    {
+        if (vertex != vertexIndex && vertex != firstOutGoingVertex)
+        {
+            nextVertex = vertex;
+            break;
+        }
+    }
+
+    int nextEdgeIndex = getEdgeIndex(vertexIndex, nextVertex);
+
+    int count = 1;
+
+    while (nextEdgeIndex != firstEdgeIndex)
+    {
+        DirectedEdges nextEdge = this->directedEdges[nextEdgeIndex];
+        int nextFaceIndex = nextEdge.face;
+        Faces nextFace = this->faces[nextFaceIndex];
+
+        // int nextVertex = -1;
+        for (int vertex : nextFace.face)
+        {
+            if (vertex != vertexIndex && vertex != nextEdge.to)
+            {
+                nextVertex = vertex;
+                break;
+            }
+        }
+
+        nextEdgeIndex = getEdgeIndex(vertexIndex, nextVertex);
+        count++;
+
+        if (count > countConnectedEdges)
+            break;
+    }
+
+    // std::cout << "edges counted: " << count << std::endl;
+    if (count == countConnectedEdges)
+        cycles = 1;
+    if (count > countConnectedEdges)
+        cycles = 2;
+
+
+
+
+
+    // std::cout << "Cycles: " << cycles << std::endl;
+    return cycles;
 }
 
 
@@ -209,9 +297,11 @@ std::vector<int> Mesh::vertexManifoldTest()
 
     // function to loop through all the vertices and check if they have exactly 1 cycle
     std::cout << "Vertex Manifold Test Started" << std::endl;
+    // std::cout << "Vertices: " << this->vertices.size() << std::endl;
 
     for (int i = 0; i < this->vertices.size(); i++)
     {
+        std::cout << "Vertex: " << i << std::endl;
         if (countCycles(i) != 1)
             nonManifoldVertices.push_back(i);
     }
@@ -243,6 +333,62 @@ void Mesh::printFaceFile()
         std::cout << "Face " << i << ": " << this->faces[i].face[0] << " " << this->faces[i].face[1] << " " << this->faces[i].face[2] << std::endl;
     }
 }
+
+
+int Mesh::saveFaceFile(std::ofstream output_file)
+{
+    if (!output_file.is_open())
+    {
+        std::cerr << "Error: could not open output file " << std::endl;
+        return 1;
+    }
+
+    output_file << "# University of Leeds 2024-2025" << std::endl;
+    output_file << "# COMP 5893M Assignment 1" << std::endl;
+    output_file << "# Student Name: Tejaswa Rizyal" << std::endl;
+    output_file << "# Student Number: 201484983" << std::endl;
+    output_file << "#"<< std::endl;
+    output_file << "# Object Name: " << this->objName << std::endl;
+    output_file << "# Vertices=" << this->numUniqueVertices <<" Faces=" << this->numFaces <<std::endl;
+    output_file << "#" << std::endl;
+
+    for (int i = 0; i < this->numUniqueVertices; i++)
+    {
+        output_file << "Vertex " << i << ": " <<std::fixed<<std::setprecision(4)<< this->vertices[i].x << " " << this->vertices[i].y << " " << this->vertices[i].z << std::endl;
+    }
+
+    for (int i = 0; i < this->numFaces; i++)
+    {
+        output_file << "Face " << i << ": " << this->faces[i].face[0] << " " << this->faces[i].face[1] << " " << this->faces[i].face[2] << std::endl;
+    }
+
+    output_file.close();
+    return 0;
+}
+
+
+int Mesh::saveObjFile(std::ofstream output_file)
+{
+    if (!output_file.is_open())
+    {
+        std::cerr << "Error: could not open output file " << std::endl;
+        return 1;
+    }
+
+    for (int i = 0; i < this->numUniqueVertices; i++)
+    {
+        output_file << "v" <<std::setprecision(4) << this->vertices[i].x << " " << this->vertices[i].y << " " << this->vertices[i].z << std::endl;
+    }
+
+    for (int i = 0 ; i < this->numFaces ; i++)
+    {
+        output_file << "f " << this->faces[i].face[0] + 1 << " " << this->faces[i].face[1] + 1 << " " << this->faces[i].face[2] + 1 << std::endl;
+    }
+
+    return 0;
+}
+
+
 
 
 void Mesh::printDiredgeFile()
@@ -280,4 +426,51 @@ void Mesh::printDiredgeFile()
         std::cout << "OtherHalf " << i << " " << this->otherHalfs[i] << std::endl;
     }
 }
+
+
+int Mesh::saveDiredgeFile(std::ofstream output_file)
+{
+    if (!output_file.is_open())
+    {
+        std::cerr << "Error: could not open output file " << std::endl;
+        return 1;
+    }
+
+    output_file << "# University of Leeds 2024-2025" << std::endl;
+    output_file << "# COMP 5893M Assignment 1" << std::endl;
+    output_file << "# Student Name: Tejaswa Rizyal" << std::endl;
+    output_file << "# Student Number: 201484983" << std::endl;
+    output_file << "#"<< std::endl;
+    output_file << "# Object Name: " << this->objName << std::endl;
+    output_file << "# Vertices=" << this->numUniqueVertices <<" Faces=" << this->numFaces <<std::endl;
+    output_file << "#" << std::endl;
+
+
+    // write the vertices
+    for (int i = 0; i < this->numUniqueVertices; i++)
+    {
+        output_file << "Vertex " << i << ": " << this->vertices[i].x << " " << this->vertices[i].y << " " << this->vertices[i].z << std::endl;
+    }
+
+    // write the first directed edge for each vertex
+    for (int i = 0 ; i < this->numUniqueVertices; i++)
+    {
+        output_file << "FirstDirectedEdge " << i << " " << this->firstDirectedEdges[i] << std::endl;
+    }
+
+    // write the faces
+    for (int i = 0; i < this->numFaces; i++)
+    {
+        output_file << "Face " << i << ": " << this->faces[i].face[0] << " " << this->faces[i].face[1] << " " << this->faces[i].face[2] << std::endl;
+    }
+
+    // write the edge other halfs
+    for (int i = 0; i < this->numFaces * 3; i++)
+    {
+        output_file << "OtherHalf " << i << " " << this->otherHalfs[i] << std::endl;
+    }
+
+    return 0;
+}
+
 

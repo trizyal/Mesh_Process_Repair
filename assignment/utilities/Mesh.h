@@ -105,15 +105,25 @@ class Mesh {
     // function to get the directed edges from the vertex
     std::vector<DirectedEdges> getConnectedEdges(int vertexIndex);
 
+    // function to get the directed edges index from the vertex
+    std::vector<int> getConnectedEdgesIndices(int vertexIndex);
+    int getEdgeIndex(int from, int to);
+
 
     // ----------------- PRINT FUNCTIONS -----------------
     // std print for console
     // does what .face file should look like
     void printFaceFile();
 
+    int saveFaceFile(std::ofstream output_file);
+
+    int saveObjFile(std::ofstream output_file);
+
     // std print for console
     // does what .diredge file should look like
     void printDiredgeFile();
+
+    int saveDiredgeFile(std::ofstream output_file);
 
 
     void printDirectedEdges()
