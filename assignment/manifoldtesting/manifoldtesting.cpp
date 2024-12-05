@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     // 3. no self-intersections
 
     // print non manifold edges
-    mesh.printManifoldTestResults();
+    // mesh.printManifoldTestResults();
 
     // save the results to a file
     std::string filename = "manifold_test_results/"+ obj_name + ".txt";

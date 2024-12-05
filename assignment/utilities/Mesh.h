@@ -13,6 +13,7 @@
 #include <fstream>
 #include <array>
 #include <sstream>
+#include <set>
 
 struct Faces
 {
@@ -120,10 +121,20 @@ class Mesh {
     // ----------------- GENUS CALCULATION FUNCTIONS -----------------
 
     // function to calculate the genus of the mesh
-    int calculateGenus();
+    int calculateGenus() const;
 
 
-    // ----------------- PRINT FUNCTIONS -----------------
+    // ----------------- MESH REPAIR FUNCTIONS -----------------
+
+    // function to get the unpaired edges
+    std::vector<int> getUnpairedEdges();
+
+    // function to group the unpaired edges into holes
+    std::vector<std::vector<int>> getHoles();
+
+
+
+    // ----------------- PRINT AND SAVE FUNCTIONS -----------------
 
     // std print for console
     // does what .face file should look like
@@ -145,12 +156,16 @@ class Mesh {
     // print the directed edges
     void printDirectedEdges() const;
 
+    // print other halfs
+    void printOtherHalfs() const;
+
     // print manifold testing results
     void printManifoldTestResults();
 
     int saveManifoldTestResults(std::ofstream output_file);
 
-
+    // save repaired mesh tri file
+    int saveRepairedMesh(std::ofstream output_file) const;
 
 };
 

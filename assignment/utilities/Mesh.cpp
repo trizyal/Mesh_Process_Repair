@@ -5,7 +5,6 @@
 #include "Mesh.h"
 
 #include <algorithm>
-#include <assert.h>
 #include <iomanip>
 
 
@@ -390,8 +389,7 @@ std::vector<int> Mesh::vertexManifoldTest()
 //
 //----------------------------------------------------------------------------------
 
-
-int Mesh::calculateGenus()
+int Mesh::calculateGenus() const
 {
     // Eulers formula for a 2-manifold
 
@@ -401,6 +399,44 @@ int Mesh::calculateGenus()
 
     return genus;
 }
+
+
+
+// ----------------------------------------------------------------------------------
+//
+// functions to repair the mesh
+//
+// ----------------------------------------------------------------------------------
+
+std::vector<int> Mesh::getUnpairedEdges()
+{
+    std::vector<int> unpairedEdges;
+
+    std::cout << "Unpaired Edges Test Started" << std::endl;
+
+    for (int i = 0; i < this->directedEdges.size(); i++)
+    {
+        if (countIncidentFaces(i) == 1)
+            unpairedEdges.push_back(i);
+    }
+
+    return unpairedEdges;
+}
+
+std::vector<std::vector<int>> Mesh::getHoles()
+{
+    std::set<int> visitedEdges;
+    std::vector<std::vector<int>> holes;
+    std::vector<int> unpairedEdges = getUnpairedEdges();
+
+    std::cout << "Holes Test Started" << std::endl;
+
+    holes.push_back(unpairedEdges);
+
+
+    return holes;
+}
+
 
 
 
@@ -581,6 +617,16 @@ void Mesh::printDirectedEdges() const
         std::cout << "Directed Edge " << i << ": " << this->directedEdges[i].from << " " << this->directedEdges[i].to << " " << this->directedEdges[i].face << std::endl;
     }
 }
+
+
+void Mesh::printOtherHalfs() const
+{
+    for (int i = 0; i < this->otherHalfs.size(); i++)
+    {
+        std::cout << "Other Half " << i << ": " << this->otherHalfs[i] << std::endl;
+    }
+}
+
 
 void Mesh::printManifoldTestResults()
 {
