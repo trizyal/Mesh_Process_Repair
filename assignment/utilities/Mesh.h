@@ -45,7 +45,6 @@ class Mesh {
     // stores the index for of the edge in directedEdges for each implicit vertex
     std::vector<int> firstDirectedEdges;
 
-
     // vector to store the other half of the directed edges
     // stores the index for of the edge in directedEdges for each implicit edge
     std::vector<int> otherHalfs;
@@ -58,18 +57,23 @@ class Mesh {
         numFaces = 0;
     }
 
+
+    //------------------ FILE READING FUNCTIONS ------------------
+
     // function to read a .tri file and populate the mesh object
     void readTriFile(std::ifstream input_file);
 
-
-    // TODO: implement the following function
     // function to read a .face file and populate the mesh object
     void readFaceFile(std::ifstream input_file);
+
+
+
+    //------------------ COMPUTING FUNCTIONS ------------------
 
     // function to check if the vertex exists in vertices
     // if it does return the index
     // otherwise emplace_back and return the new index
-    int findVertex(Cartesian3 vertex);
+    int findSaveVertex(Cartesian3 vertex);
 
     // populate the directedEdges vector
     // for each face, create 3 directed edges
@@ -86,6 +90,7 @@ class Mesh {
     void computeOtherHalfs();
 
 
+
     // ----------------- MANIFOLD TESTING FUNCTIONS -----------------
 
     // function to loop through all the edges and check if they have exactly 2 incident faces
@@ -100,42 +105,54 @@ class Mesh {
     // function to count the number of cycles for a given vertex
     int countCycles(int vertexIndex);
 
-    int countEdges(int vertexIndex);
+    int countEdges(int vertexIndex) const;
 
     // function to get the directed edges from the vertex
-    std::vector<DirectedEdges> getConnectedEdges(int vertexIndex);
+    std::vector<DirectedEdges> getConnectedEdges(int vertexIndex) const;
 
     // function to get the directed edges index from the vertex
-    std::vector<int> getConnectedEdgesIndices(int vertexIndex);
-    int getEdgeIndex(int from, int to);
+    std::vector<int> getConnectedEdgesIndices(int vertexIndex) const;
+
+    // function to get the edge index from the 2 vertices
+    int getEdgeIndex(int from, int to) const;
+
+
+    // ----------------- GENUS CALCULATION FUNCTIONS -----------------
+
+    // function to calculate the genus of the mesh
+    int calculateGenus();
 
 
     // ----------------- PRINT FUNCTIONS -----------------
+
     // std print for console
     // does what .face file should look like
-    void printFaceFile();
+    void printFaceFile() const;
 
-    int saveFaceFile(std::ofstream output_file);
+    // save the face file
+    int saveFaceFile(std::ofstream output_file) const;
 
-    int saveObjFile(std::ofstream output_file);
+    // save face file as obj file or debugging and blender
+    int saveObjFile(std::ofstream output_file) const;
 
     // std print for console
     // does what .diredge file should look like
-    void printDiredgeFile();
+    void printDiredgeFile() const;
 
-    int saveDiredgeFile(std::ofstream output_file);
+    // save the diredge file
+    int saveDiredgeFile(std::ofstream output_file) const;
+
+    // print the directed edges
+    void printDirectedEdges() const;
+
+    // print manifold testing results
+    void printManifoldTestResults();
+
+    int saveManifoldTestResults(std::ofstream output_file);
 
 
-    void printDirectedEdges()
-    {
-        for (DirectedEdges edge : directedEdges)
-        {
-            std::cout << "From: " << edge.from << " To: " << edge.to << " Face: " << edge.face << std::endl;
-        }
-    }
 
 };
-
 
 
 #endif //MESH_H

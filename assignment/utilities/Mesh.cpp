@@ -8,6 +8,13 @@
 #include <assert.h>
 #include <iomanip>
 
+
+//----------------------------------------------------------------------------------
+//
+// functions to read the files
+//
+//----------------------------------------------------------------------------------
+
 void Mesh::readTriFile(std::ifstream input_file)
 {
     std::string line;
@@ -27,15 +34,15 @@ void Mesh::readTriFile(std::ifstream input_file)
 
         input_file >> x >> y >> z;
         vertex1 = Cartesian3(x, y, z);
-        index1 = findVertex(vertex1);
+        index1 = findSaveVertex(vertex1);
 
         input_file >> x >> y >> z;
         vertex2 = Cartesian3(x, y, z);
-        index2 = findVertex(vertex2);
+        index2 = findSaveVertex(vertex2);
 
         input_file >> x >> y >> z;
         vertex3 = Cartesian3(x, y, z);
-        index3 = findVertex(vertex3);
+        index3 = findSaveVertex(vertex3);
 
         this->faces.push_back({index1, index2, index3});
         this->numFaces++;
@@ -103,7 +110,13 @@ void Mesh::readFaceFile(std::ifstream input_file)
 
 
 
-int Mesh::findVertex(Cartesian3 vertex)
+//----------------------------------------------------------------------------------
+//
+// functions to compute different data
+//
+//----------------------------------------------------------------------------------
+
+int Mesh::findSaveVertex(Cartesian3 vertex)
 {
     // find the index of the vertex in the vertices vector
     for (int i = 0; i < this->numUniqueVertices; i++)
@@ -180,6 +193,13 @@ void Mesh::computeOtherHalfs()
 }
 
 
+//----------------------------------------------------------------------------------
+//
+// functions to test for manifold
+//
+//----------------------------------------------------------------------------------
+
+
 int Mesh::countIncidentFaces(int edgeIndex)
 {
     int count = 0;
@@ -217,7 +237,8 @@ std::vector<int> Mesh::edgeManifoldTest()
 }
 
 
-int Mesh::countEdges(int vertexIndex)
+
+int Mesh::countEdges(const int vertexIndex) const
 {
     int count = 0;
     for (int i = 0; i < this->directedEdges.size(); i++)
@@ -232,7 +253,8 @@ int Mesh::countEdges(int vertexIndex)
 }
 
 
-std::vector<DirectedEdges> Mesh::getConnectedEdges(int vertexIndex)
+
+std::vector<DirectedEdges> Mesh::getConnectedEdges(const int vertexIndex) const
 {
     std::vector<DirectedEdges> connectedEdges;
     for (int i = 0; i < this->directedEdges.size(); i++)
@@ -244,7 +266,8 @@ std::vector<DirectedEdges> Mesh::getConnectedEdges(int vertexIndex)
 }
 
 
-std::vector<int> Mesh::getConnectedEdgesIndices(int vertexIndex)
+
+std::vector<int> Mesh::getConnectedEdgesIndices(const int vertexIndex) const
 {
     std::vector<int> connectedEdges;
     for (int i = 0; i < this->directedEdges.size(); i++)
@@ -255,7 +278,9 @@ std::vector<int> Mesh::getConnectedEdgesIndices(int vertexIndex)
     return connectedEdges;
 }
 
-int Mesh::getEdgeIndex(int from, int to)
+
+
+int Mesh::getEdgeIndex(const int from, const int to) const
 {
     for (int i = 0; i < this->directedEdges.size(); i++)
     {
@@ -266,7 +291,8 @@ int Mesh::getEdgeIndex(int from, int to)
 }
 
 
-int Mesh::countCycles(int vertexIndex)
+
+int Mesh::countCycles(const int vertexIndex)
 {
     int cycles = 0;
 
@@ -334,11 +360,6 @@ int Mesh::countCycles(int vertexIndex)
     if (count > countConnectedEdges)
         cycles = 2;
 
-
-
-
-
-    // std::cout << "Cycles: " << cycles << std::endl;
     return cycles;
 }
 
@@ -350,11 +371,9 @@ std::vector<int> Mesh::vertexManifoldTest()
 
     // function to loop through all the vertices and check if they have exactly 1 cycle
     std::cout << "Vertex Manifold Test Started" << std::endl;
-    // std::cout << "Vertices: " << this->vertices.size() << std::endl;
 
     for (int i = 0; i < this->vertices.size(); i++)
     {
-        std::cout << "Vertex: " << i << std::endl;
         if (countCycles(i) != 1)
             nonManifoldVertices.push_back(i);
     }
@@ -365,7 +384,35 @@ std::vector<int> Mesh::vertexManifoldTest()
 
 
 
-void Mesh::printFaceFile()
+//----------------------------------------------------------------------------------
+//
+// functions to calculate the genus
+//
+//----------------------------------------------------------------------------------
+
+
+int Mesh::calculateGenus()
+{
+    // Eulers formula for a 2-manifold
+
+    int X = this->numUniqueVertices - static_cast<int>(this->directedEdges.size()/2) + this->numFaces;
+
+    int genus = std::max((2-X)/2, 0);
+
+    return genus;
+}
+
+
+
+//--------------------------------------------------------------------------------------------
+//
+// functions to print and save the files
+//
+//--------------------------------------------------------------------------------------------
+
+
+
+void Mesh::printFaceFile() const
 {
     std::cout << "# University of Leeds 2024-2025" << std::endl;
     std::cout << "# COMP 5893M Assignment 1" << std::endl;
@@ -388,7 +435,7 @@ void Mesh::printFaceFile()
 }
 
 
-int Mesh::saveFaceFile(std::ofstream output_file)
+int Mesh::saveFaceFile(std::ofstream output_file) const
 {
     if (!output_file.is_open())
     {
@@ -420,7 +467,7 @@ int Mesh::saveFaceFile(std::ofstream output_file)
 }
 
 
-int Mesh::saveObjFile(std::ofstream output_file)
+int Mesh::saveObjFile(std::ofstream output_file) const
 {
     if (!output_file.is_open())
     {
@@ -430,7 +477,7 @@ int Mesh::saveObjFile(std::ofstream output_file)
 
     for (int i = 0; i < this->numUniqueVertices; i++)
     {
-        output_file << "v" <<std::setprecision(4) << this->vertices[i].x << " " << this->vertices[i].y << " " << this->vertices[i].z << std::endl;
+        output_file << "v " <<std::setprecision(4) << this->vertices[i].x << " " << this->vertices[i].y << " " << this->vertices[i].z << std::endl;
     }
 
     for (int i = 0 ; i < this->numFaces ; i++)
@@ -444,7 +491,7 @@ int Mesh::saveObjFile(std::ofstream output_file)
 
 
 
-void Mesh::printDiredgeFile()
+void Mesh::printDiredgeFile() const
 {
     std::cout << "# University of Leeds 2024-2025" << std::endl;
     std::cout << "# COMP 5893M Assignment 1" << std::endl;
@@ -481,7 +528,7 @@ void Mesh::printDiredgeFile()
 }
 
 
-int Mesh::saveDiredgeFile(std::ofstream output_file)
+int Mesh::saveDiredgeFile(std::ofstream output_file) const
 {
     if (!output_file.is_open())
     {
@@ -525,5 +572,72 @@ int Mesh::saveDiredgeFile(std::ofstream output_file)
 
     return 0;
 }
+
+
+void Mesh::printDirectedEdges() const
+{
+    for (int i = 0; i < this->directedEdges.size(); i++)
+    {
+        std::cout << "Directed Edge " << i << ": " << this->directedEdges[i].from << " " << this->directedEdges[i].to << " " << this->directedEdges[i].face << std::endl;
+    }
+}
+
+void Mesh::printManifoldTestResults()
+{
+    std::vector<int> nonManifoldEdges = edgeManifoldTest();
+    std::vector<int> nonManifoldVertices = vertexManifoldTest();
+
+    if (nonManifoldEdges.empty() && nonManifoldVertices.empty())
+        std::cout << "\nThe mesh is 2-manifold" << std::endl;
+    else
+    {
+        std::cout << "The mesh is not 2-manifold" << std::endl;
+        std::cout << "Non manifold edges and vertices: " << std::endl;
+        for (const int edge : nonManifoldEdges)
+        {
+            std::cout << "Edge " << edge << std::endl;
+        }
+        for (const int vertex : nonManifoldVertices)
+        {
+            std::cout << "Vertex " << vertex << std::endl;
+        }
+    }
+}
+
+
+int Mesh::saveManifoldTestResults(std::ofstream output_file)
+{
+    if (!output_file.is_open())
+    {
+        std::cerr << "Error: could not open output file " << std::endl;
+        return 1;
+    }
+
+    output_file << "# Manifold testing results for " << this->objName << ".tri" << std::endl;
+
+    std::vector<int> nonManifoldEdges = edgeManifoldTest();
+    std::vector<int> nonManifoldVertices = vertexManifoldTest();
+
+    if (nonManifoldEdges.empty() && nonManifoldVertices.empty())
+        output_file << "\nThe mesh is 2-manifold" << std::endl;
+    else
+    {
+        output_file << "The mesh is not 2-manifold" << std::endl;
+        output_file << "Non manifold edges and vertices: " << std::endl;
+        for (const int edge : nonManifoldEdges)
+        {
+            output_file << "Edge " << edge << std::endl;
+        }
+        for (const int vertex : nonManifoldVertices)
+        {
+            output_file << "Vertex " << vertex << std::endl;
+        }
+    }
+
+    return 0;
+}
+
+
+
 
 

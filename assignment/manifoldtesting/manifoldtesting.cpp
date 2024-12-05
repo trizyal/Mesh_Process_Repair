@@ -53,23 +53,25 @@ int main(int argc, char *argv[])
     // 3. no self-intersections
 
     // print non manifold edges
-    std::vector<int> nonManifoldEdges = mesh.edgeManifoldTest();
-    std::vector<int> nonManifoldVertices = mesh.vertexManifoldTest();
+    mesh.printManifoldTestResults();
 
-    if (nonManifoldEdges.empty() && nonManifoldVertices.empty())
-        std::cout << "The mesh is 2-manifold" << std::endl;
-    else
+    // save the results to a file
+    std::string filename = "manifold_test_results/"+ obj_name + ".txt";
+
+    std::string output_dir = "manifold_test_results";
+    std::string command = "mkdir -p " + output_dir;
+    system(command.c_str());
+
+    std::ofstream outfile(filename.c_str());
+    if (!outfile.is_open())
     {
-        std::cout << "Non manifold edges and vertices" << std::endl;
-        for (int Edge : nonManifoldEdges)
-        {
-            std::cout << "Edge " << Edge << std::endl;
-        }
-        for (int Vertex : nonManifoldVertices)
-        {
-            std::cout << "Vertex " << Vertex << std::endl;
-        }
+        std::cerr << "Error: could not open file " << filename << std::endl;
+        return 1;
     }
+
+    mesh.saveManifoldTestResults(std::move(outfile));
+    outfile.close();
+
     return 0;
 
 }
