@@ -609,12 +609,35 @@ std::vector<std::vector<int>> Mesh::getHoles()
     std::vector<int> unpairedEdgesOtherHalfs = getUnpairedEdgesFromOtherHalfs(); // no other half
     std::vector<int> repeatedEdges = getRepeatedEdges(); // repeats in otherHalfs
 
+    for (int edge : unpairedEdges)
+    {
+        if (visitedEdges.count(edge) == 1)
+            continue;
+
+        std::vector<int> hole;
+        int currentEdge = edge;
+        while (true)
+        {
+            hole.push_back(currentEdge);
+            visitedEdges.insert(currentEdge);
+
+            int nextEdge = this->otherHalfs[currentEdge];
+            if (nextEdge == -1)
+                break;
+
+            currentEdge = nextEdge;
+        }
+
+        holes.push_back(hole);
+    }
+
 
 
     holes.push_back(unpairedEdgesOtherHalfs);
 
     return holes;
 }
+
 
 
 void Mesh::repairMesh()
@@ -625,10 +648,13 @@ void Mesh::repairMesh()
     // printDirectedEdges();
     // printOtherHalfs();
 
-    printDirectedEdges();
-    printOtherHalfs();
+    // printDirectedEdges();
+    // printOtherHalfs();
 
     std::vector<std::vector<int>> holes = getHoles();
+
+    std::cout << "Number of holes: " << holes.size() << std::endl;
+    return;
 
     std::vector<int> hole = holes[0];
 

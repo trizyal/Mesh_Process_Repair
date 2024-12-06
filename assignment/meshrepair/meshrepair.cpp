@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 
     mesh.repairMesh();
 
-    std::string filename = "objfiles/" + obj_name + ".obj";
+    std::string filename = "objfiles/" + obj_name + "_repaired.obj";
 
     std::string output_dir = "objfiles";
     std::string command = "mkdir -p " + output_dir;
