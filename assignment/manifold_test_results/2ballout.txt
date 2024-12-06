@@ -1,0 +1,3 @@
+# Manifold testing results for 2ballout.tri
+
+The mesh is 2-manifold

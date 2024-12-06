@@ -51,21 +51,38 @@ int main(int argc, char *argv[])
     }
     */
 
-    std::vector<std::vector<int>> holes = mesh.getHoles();
+    mesh.repairMesh();
 
-    std::cout << "Holes: " << holes.size() << std::endl;
+    std::string filename = "objfiles/" + obj_name + ".obj";
 
-    for (auto &hole : holes)
+    std::string output_dir = "objfiles";
+    std::string command = "mkdir -p " + output_dir;
+    system(command.c_str());
+
+    std::ofstream outfile_obj(filename.c_str());
+    if (!outfile_obj.is_open())
     {
-        std::cout << "Hole: ";
-        for (auto &edge : hole)
-        {
-            std::cout << edge << " ";
-        }
-        std::cout << std::endl;
+        std::cerr << "Error: could not open file " << filename << std::endl;
+        return 1;
     }
 
-    mesh.printOtherHalfs();
-    mesh.printDirectedEdges();
+    mesh.saveObjFile(std::move(outfile_obj));
+    outfile_obj.close();
+
+    filename = "trifiles/" + obj_name + "_repaired.tri";
+    output_dir = "trifiles";
+    command = "mkdir -p " + output_dir;
+    system(command.c_str());
+
+    std::ofstream outfile_tri(filename.c_str());
+    if (!outfile_tri.is_open())
+    {
+        std::cerr << "Error: could not open file " << filename << std::endl;
+        return 1;
+    }
+
+    mesh.saveRepairedMesh(std::move(outfile_tri));
+    outfile_tri.close();
+
     return 0;
 }

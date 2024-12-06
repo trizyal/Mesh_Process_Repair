@@ -18,6 +18,26 @@
 struct Faces
 {
     int face[3];
+
+    bool operator == (const Faces &other) const
+    {
+        if (face[0] == other.face[0] && face[1] == other.face[1] && face[2] == other.face[2])
+            return true;
+        if (face[0] == other.face[1] && face[1] == other.face[2] && face[2] == other.face[0])
+            return true;
+        if (face[0] == other.face[2] && face[1] == other.face[0] && face[2] == other.face[1])
+            return true;
+        if (face[0] == other.face[0] && face[1] == other.face[2] && face[2] == other.face[1])
+            return true;
+        if (face[0] == other.face[1] && face[1] == other.face[0] && face[2] == other.face[2])
+            return true;
+        if (face[0] == other.face[2] && face[1] == other.face[1] && face[2] == other.face[0])
+            return true;
+        if (face[0] == other.face[2] && face[1] == other.face[0] && face[2] == other.face[1])
+            return true;
+
+        return false;
+    }
 };
 
 struct DirectedEdges
@@ -106,6 +126,7 @@ class Mesh {
     // function to count the number of cycles for a given vertex
     int countCycles(int vertexIndex);
 
+    // function to count the number of connected edges for a given vertex
     int countEdges(int vertexIndex) const;
 
     // function to get the directed edges from the vertex
@@ -126,11 +147,32 @@ class Mesh {
 
     // ----------------- MESH REPAIR FUNCTIONS -----------------
 
-    // function to get the unpaired edges
+    // function to return edges with 1 incident faces
     std::vector<int> getUnpairedEdges();
+
+    // function to get edges with no other half
+    std::vector<int> getUnpairedEdgesFromOtherHalfs();
+
+    // function to get repeated edges in directedEdges
+    std::vector<int> getRepeatedEdges();
 
     // function to group the unpaired edges into holes
     std::vector<std::vector<int>> getHoles();
+
+    // function to get faces that are equal to a given face
+    std::vector<int> getEqualFaces(int faceIndex);
+
+    // function to get edges that are equal to a given edge
+    std::vector<int> getEqualEdges(int edgeIndex);
+
+    void repairMesh();
+
+    void removeFaceEdges(int faceIndex);
+
+    // function to remove repeated faces
+    void removeRepeatedFaces();
+
+    void removeEqualEdges();
 
 
 

@@ -1,0 +1,16 @@
+# University of Leeds 2024-2025
+# COMP 5893M Assignment 1
+# Student Name: Tejaswa Rizyal
+# Student Number: 201484983
+#
+# Object Name: tetrahedron_bad
+# Vertices=4 Faces=4
+#
+Vertex 0: -1.0000 -1.0000 -1.0000
+Vertex 1: 1.0000 -1.0000 1.0000
+Vertex 2: -1.0000 1.0000 1.0000
+Vertex 3: 1.0000 1.0000 -1.0000
+Face 0: 0 1 2
+Face 1: 2 3 0
+Face 2: 2 1 3
+Face 3: 0 3 2

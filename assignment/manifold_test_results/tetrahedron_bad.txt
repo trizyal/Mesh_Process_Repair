@@ -1,0 +1,12 @@
+# Manifold testing results for tetrahedron_bad.tri
+The mesh is not 2-manifold
+Non manifold edges and vertices: 
+Edge 0
+Edge 3
+Edge 5
+Edge 7
+Edge 10
+Edge 11
+Vertex 0
+Vertex 1
+Vertex 2
