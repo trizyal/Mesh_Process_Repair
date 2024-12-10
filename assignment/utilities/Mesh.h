@@ -174,6 +174,15 @@ class Mesh {
 
     void removeEqualEdges();
 
+    // function to remove non connected edges
+    void removeNonConnectedEdges();
+
+    void removeNonConnectedVertices();
+
+    void removeNotConnectedFaces();
+
+    int getEdgeIndexFromVertex(int vertexIndex, std::vector<int> unpairedEdges, std::set<int> &visitedVertices);
+
 
 
     // ----------------- PRINT AND SAVE FUNCTIONS -----------------

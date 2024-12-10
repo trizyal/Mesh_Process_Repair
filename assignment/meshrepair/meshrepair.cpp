@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    mesh.saveRepairedMesh(std::move(outfile_tri));
+    // mesh.saveRepairedMesh(std::move(outfile_tri));
     outfile_tri.close();
 
     return 0;

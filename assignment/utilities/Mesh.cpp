@@ -515,6 +515,7 @@ std::vector<int> Mesh::getRepeatedEdges()
 }
 
 
+
 void Mesh::removeEqualEdges()
 {
     std::set<int> removedEdges;
@@ -600,42 +601,80 @@ void Mesh::removeRepeatedFaces()
 
 
 
+int Mesh::getEdgeIndexFromVertex(int vertexIndex, std::vector<int> unpairedEdges, std::set<int> &visitedVertices)
+{
+    for ( int edgeIndex : unpairedEdges)
+    {
+        DirectedEdges edge = this->directedEdges[edgeIndex];
+        if ((edge.from == vertexIndex || edge.to == vertexIndex) && visitedVertices.count(vertexIndex) == 0)
+            return edgeIndex;
+    }
+    return -1;
+}
+
+
+
+
 
 std::vector<std::vector<int>> Mesh::getHoles()
 {
     std::set<int> visitedEdges;
+    std::set<int> visitedVertices;
     std::vector<std::vector<int>> holes;
-    std::vector<int> unpairedEdges = getUnpairedEdges(); // 1 incident face
-    std::vector<int> unpairedEdgesOtherHalfs = getUnpairedEdgesFromOtherHalfs(); // no other half
-    std::vector<int> repeatedEdges = getRepeatedEdges(); // repeats in otherHalfs
 
-    for (int edge : unpairedEdges)
+    std::vector<int> unpairedEdgesOtherHalfs = getUnpairedEdgesFromOtherHalfs(); // no other half
+    std::cout << "Number of unpaired Edges: " << unpairedEdgesOtherHalfs.size() << std::endl;
+
+
+
+    for (int edgeIndex : unpairedEdgesOtherHalfs)
     {
-        if (visitedEdges.count(edge) == 1)
+        if (visitedEdges.count(edgeIndex) == 1)
             continue;
 
         std::vector<int> hole;
-        int currentEdge = edge;
-        while (true)
-        {
-            hole.push_back(currentEdge);
-            visitedEdges.insert(currentEdge);
 
-            int nextEdge = this->otherHalfs[currentEdge];
-            if (nextEdge == -1)
+        int firstEdgeIndex = edgeIndex;
+        int firstVertex = this->directedEdges[edgeIndex].from;
+        int currentVertex = firstVertex;
+        int currentEdgeIndex = edgeIndex;
+
+        visitedVertices.insert(firstVertex);
+        visitedEdges.insert(edgeIndex);
+
+        hole.push_back(edgeIndex);
+
+        int nextVertex = this->directedEdges[edgeIndex].to;
+
+        // int nextEdgeIndex;
+        do
+        {
+
+            int nextEdgeIndex = getEdgeIndexFromVertex(nextVertex, unpairedEdgesOtherHalfs, visitedVertices);
+
+            if (visitedEdges.count(nextEdgeIndex) == 1)
                 break;
 
-            currentEdge = nextEdge;
-        }
+            visitedEdges.insert(nextEdgeIndex);
+            // visitedVertices.insert(nextVertex);
 
-        holes.push_back(hole);
+            hole.push_back(nextEdgeIndex);
+
+            nextVertex = this->directedEdges[nextEdgeIndex].from != nextVertex ? this->directedEdges[nextEdgeIndex].to : this->directedEdges[nextEdgeIndex].from;
+            currentEdgeIndex = nextEdgeIndex;
+            currentVertex = nextVertex;
+
+        }
+        while (nextVertex != firstVertex);
+
+        if (!hole.empty())
+            holes.push_back(hole);
+
     }
 
-
-
-    holes.push_back(unpairedEdgesOtherHalfs);
-
     return holes;
+
+
 }
 
 
@@ -643,60 +682,7 @@ std::vector<std::vector<int>> Mesh::getHoles()
 void Mesh::repairMesh()
 {
     removeRepeatedFaces();
-    // removeEqualEdges();
-
-    // printDirectedEdges();
-    // printOtherHalfs();
-
-    // printDirectedEdges();
-    // printOtherHalfs();
-
-    std::vector<std::vector<int>> holes = getHoles();
-
-    std::cout << "Number of holes: " << holes.size() << std::endl;
-    return;
-
-    std::vector<int> hole = holes[0];
-
-    for (int edge : hole)
-    {
-        std::cout << "Edge " << edge << std::endl;
-    }
-
-    if (hole.size() == 3)
-    {
-        int edge0Index = hole[0];
-        int edge1Index = hole[1];
-        int edge2Index = hole[2];
-
-        DirectedEdges edge0 = this->directedEdges[edge0Index];
-        DirectedEdges edge1 = this->directedEdges[edge1Index];
-        DirectedEdges edge2 = this->directedEdges[edge2Index];
-
-        // the vertices of the hole
-        int vertex0 = edge0.from;
-        int vertex1 = edge1.from;
-        int vertex2 = edge2.from;
-
-        DirectedEdges newEdge0 = {vertex0, vertex1, this->numFaces};
-        DirectedEdges newEdge1 = {vertex1, vertex2, this->numFaces};
-        DirectedEdges newEdge2 = {vertex2, vertex0, this->numFaces};
-
-        this->directedEdges.push_back(newEdge0);
-        this->directedEdges.push_back(newEdge1);
-        this->directedEdges.push_back(newEdge2);
-
-        this->faces.push_back({vertex0, vertex1, vertex2});
-        this->numFaces++;
-    }
-    else
-    {
-
-    }
-
-    this->directedEdges.clear();
-    this->firstDirectedEdges.clear();
-    this->otherHalfs.clear();
+    removeEqualEdges();
 
     computeDirectedEdges();
     computeFirstDirectedEdges();
@@ -704,6 +690,68 @@ void Mesh::repairMesh()
 
     printDirectedEdges();
     printOtherHalfs();
+
+    // printDirectedEdges();
+    // printOtherHalfs();
+
+    std::vector<std::vector<int>> holes = getHoles();
+
+    std::cout << "Number of holes: " << holes.size() << std::endl;
+
+
+    // for (int edge : hole)
+    // {
+    //     std::cout << "Edge " << edge << std::endl;
+
+
+    for (std::vector<int> hole : holes)
+    {
+        std::cout << "Hole size: " << hole.size() << std::endl;
+
+        if (hole.size() == 3)
+        {
+            int edge0Index = hole[0];
+            int edge1Index = hole[1];
+            int edge2Index = hole[2];
+
+            DirectedEdges edge0 = this->directedEdges[edge0Index];
+            DirectedEdges edge1 = this->directedEdges[edge1Index];
+            DirectedEdges edge2 = this->directedEdges[edge2Index];
+
+            // the vertices of the hole
+            int vertex0 = edge0.from;
+            int vertex1 = edge1.from;
+            int vertex2 = edge2.from;
+
+            DirectedEdges newEdge0 = {vertex0, vertex1, this->numFaces};
+            DirectedEdges newEdge1 = {vertex1, vertex2, this->numFaces};
+            DirectedEdges newEdge2 = {vertex2, vertex0, this->numFaces};
+
+            this->directedEdges.push_back(newEdge0);
+            this->directedEdges.push_back(newEdge1);
+            this->directedEdges.push_back(newEdge2);
+
+            this->faces.push_back({vertex0, vertex1, vertex2});
+            this->numFaces++;
+        }
+        else
+        {
+
+        }
+    }
+
+    this->directedEdges.clear();
+    this->firstDirectedEdges.clear();
+    this->otherHalfs.clear();
+
+    std::cout << "helllo" << std::endl;
+
+    computeDirectedEdges();
+    computeFirstDirectedEdges();
+    computeOtherHalfs();
+
+    // printDirectedEdges();
+    // printOtherHalfs();
 }
 
 
