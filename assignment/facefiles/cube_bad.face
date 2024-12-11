@@ -4,7 +4,7 @@
 # Student Number: 201484983
 #
 # Object Name: cube_bad
-# Vertices=8 Faces=12
+# Vertices=11 Faces=12
 #
 Vertex 0: 0.0000 0.0000 0.0000
 Vertex 1: 1.0000 0.0000 0.0000
@@ -14,6 +14,9 @@ Vertex 4: 1.0000 1.0000 0.0000
 Vertex 5: 0.0000 1.0000 1.0000
 Vertex 6: 0.0000 1.0000 0.0000
 Vertex 7: 1.0000 1.0000 1.0000
+Vertex 8: 1.0000 0.0000 3.0000
+Vertex 9: 0.0000 2.0000 3.0000
+Vertex 10: 0.0000 0.0000 3.0000
 Face 0: 0 1 2
 Face 1: 0 2 3
 Face 2: 0 1 2
@@ -22,7 +25,7 @@ Face 4: 0 3 5
 Face 5: 0 5 6
 Face 6: 1 4 2
 Face 7: 4 7 2
-Face 8: 3 2 5
-Face 9: 2 7 5
-Face 10: 5 7 4
-Face 11: 5 4 6
+Face 8: 5 7 4
+Face 9: 5 4 6
+Face 10: 8 9 10
+Face 11: 1 6 10

@@ -169,6 +169,8 @@ class Mesh {
 
     void removeFaceEdges(int faceIndex);
 
+    void removeFaceVertices(int faceIndex);
+
     // function to remove repeated faces
     void removeRepeatedFaces();
 
@@ -181,7 +183,7 @@ class Mesh {
 
     void removeNotConnectedFaces();
 
-    int getEdgeIndexFromVertex(int vertexIndex, std::vector<int> unpairedEdges, std::set<int> &visitedVertices);
+    int getEdgeIndexFromVertex(int vertexIndex, std::vector<int> unpairedEdges, int previousVertex);
 
 
 
