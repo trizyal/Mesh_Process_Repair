@@ -17,23 +17,23 @@
 
 struct Faces
 {
-    int face[3];
+    int vertex[3];
 
     bool operator == (const Faces &other) const
     {
-        if (face[0] == other.face[0] && face[1] == other.face[1] && face[2] == other.face[2])
+        if (vertex[0] == other.vertex[0] && vertex[1] == other.vertex[1] && vertex[2] == other.vertex[2])
             return true;
-        if (face[0] == other.face[1] && face[1] == other.face[2] && face[2] == other.face[0])
+        if (vertex[0] == other.vertex[1] && vertex[1] == other.vertex[2] && vertex[2] == other.vertex[0])
             return true;
-        if (face[0] == other.face[2] && face[1] == other.face[0] && face[2] == other.face[1])
+        if (vertex[0] == other.vertex[2] && vertex[1] == other.vertex[0] && vertex[2] == other.vertex[1])
             return true;
-        if (face[0] == other.face[0] && face[1] == other.face[2] && face[2] == other.face[1])
+        if (vertex[0] == other.vertex[0] && vertex[1] == other.vertex[2] && vertex[2] == other.vertex[1])
             return true;
-        if (face[0] == other.face[1] && face[1] == other.face[0] && face[2] == other.face[2])
+        if (vertex[0] == other.vertex[1] && vertex[1] == other.vertex[0] && vertex[2] == other.vertex[2])
             return true;
-        if (face[0] == other.face[2] && face[1] == other.face[1] && face[2] == other.face[0])
+        if (vertex[0] == other.vertex[2] && vertex[1] == other.vertex[1] && vertex[2] == other.vertex[0])
             return true;
-        if (face[0] == other.face[2] && face[1] == other.face[0] && face[2] == other.face[1])
+        if (vertex[0] == other.vertex[2] && vertex[1] == other.vertex[0] && vertex[2] == other.vertex[1])
             return true;
 
         return false;

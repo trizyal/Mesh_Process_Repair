@@ -53,6 +53,8 @@ int main(int argc, char *argv[])
 
     mesh.repairMesh();
 
+    std::cout << "Mesh repaired successfully" << std::endl;
+
     std::string filename = "objfiles/" + obj_name + "_repaired.obj";
 
     std::string output_dir = "objfiles";
