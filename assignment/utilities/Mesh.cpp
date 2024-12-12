@@ -855,19 +855,21 @@ void Mesh::repairMesh()
                 z += this->vertices[vertex].z;
             }
 
-            float centreX = x / static_cast<float>(hole.size());
-            float centreY = y / static_cast<float>(hole.size());
-            float centreZ = z / static_cast<float>(hole.size());
+            float centreX = x*1.005f / static_cast<float>(hole.size());
+            float centreY = y*1.005f / static_cast<float>(hole.size());
+            float centreZ = z*1.005f / static_cast<float>(hole.size());
 
             Cartesian3 centre = Cartesian3(centreX, centreY, centreZ);
 
             // move this centre coordinate slightly inside the hole
             // so that it doesnt cause triangle intersections
 
-            std::cout << "Centre of mass: " << centre.x << " " << centre.y << " " << centre.z << std::endl;
+            // std::cout << "Centre of mass: " << centre.x << " " << centre.y << " " << centre.z << std::endl;
 
-
-            centre = centre + (centre - this->vertices[hole[0]]) * 0.1;
+            // DirectedEdges edge0 = this->directedEdges[hole[0]];
+            // int v = edge0.from;
+            // Cartesian3 vertex = this->vertices[v];
+            // centre = centre + (centre - vertex) * 0.1;
 
             std::cout << "Centre of mass moved slightly: " << centre.x << " " << centre.y << " " << centre.z << std::endl;
             // Cartesian3 centre = Cartesian3(4, 4, 4);
