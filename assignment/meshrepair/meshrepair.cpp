@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
 
     mesh.repairMesh();
 
-    std::cout << "Mesh repaired successfully" << std::endl;
+    std::cout << "Mesh repaired successfully for: "<< obj_name << std::endl;
 
     std::string filename = "objfiles/" + obj_name + "_repaired.obj";
 
@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // mesh.saveRepairedMesh(std::move(outfile_tri));
+    mesh.saveRepairedMesh(std::move(outfile_tri));
     outfile_tri.close();
 
     return 0;

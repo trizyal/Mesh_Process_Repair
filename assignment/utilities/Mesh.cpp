@@ -5,6 +5,7 @@
 #include "Mesh.h"
 
 #include <algorithm>
+#include <chrono>
 #include <iomanip>
 
 
@@ -46,6 +47,7 @@ void Mesh::readTriFile(std::ifstream input_file)
         this->faces.push_back({index1, index2, index3});
         this->numFaces++;
     }
+    this->numTriangles = this->numFaces;
     std::cout << "File read successfully" << std::endl;
     computeDirectedEdges();
     std::cout << "Directed Edges computed successfully" << std::endl;
@@ -713,17 +715,13 @@ std::vector<std::vector<int>> Mesh::getHoles()
         do
         {
             currentEdgeIndex = getEdgeIndexFromVertex(currentVertex, unpairedEdgesOtherHalfs, previousVertex);
-            if (currentEdgeIndex == -1)
-            {
-                std::cout<<"badbadbad BAD" << std::endl;
-            }
             visitedVertices.insert(currentVertex);
             visitedEdges.insert(currentEdgeIndex);
 
             hole.push_back(currentEdgeIndex);
 
-            int vertex0 = this->directedEdges[currentEdgeIndex].from;
-            int vertex1 = this->directedEdges[currentEdgeIndex].to;
+            int vertex0 = this->directedEdges[currentEdgeIndex].to;
+            int vertex1 = this->directedEdges[currentEdgeIndex].from;
 
             previousVertex = currentVertex;
             if (vertex0 == currentVertex)
@@ -739,16 +737,18 @@ std::vector<std::vector<int>> Mesh::getHoles()
     }
 
     return holes;
-
-
 }
+
 
 
 
 void Mesh::repairMesh()
 {
+    // time at this moment
+    auto start = std::chrono::high_resolution_clock::now();
+
     removeNotConnectedFaces();
-    // removeRepeatedFaces();
+    removeRepeatedFaces();
     // removeEqualEdges();
 
     // TODO: function to remove intersecting faces
@@ -774,7 +774,7 @@ void Mesh::repairMesh()
 
     std::vector<std::vector<int>> holes = getHoles();
 
-    // std::cout << "Number of holes: " << holes.size() << std::endl;
+    std::cout << "Number of holes: " << holes.size() << std::endl;
 
     // return;
 
@@ -787,7 +787,7 @@ void Mesh::repairMesh()
 
     for (std::vector<int> hole : holes)
     {
-        // std::cout << "Hole size: " << hole.size() << std::endl;
+        std::cout << "Hole size: " << hole.size() << std::endl;
 
         if (hole.size() == 3)
         {
@@ -814,6 +814,16 @@ void Mesh::repairMesh()
 
             this->faces.push_back({vertex0, vertex1, vertex2});
             this->numFaces++;
+            std::cout << "Triangle Face " << this->numFaces - 1 << " " << vertex0 << " " << vertex1 << " " << vertex2 << std::endl;
+
+
+            // this->directedEdges.clear();
+            // this->firstDirectedEdges.clear();
+            // this->otherHalfs.clear();
+            //
+            // computeDirectedEdges();
+            // computeFirstDirectedEdges();
+            // computeOtherHalfs();
         }
         else
         {
@@ -821,6 +831,8 @@ void Mesh::repairMesh()
             // put a vertex there
             // push that vertex slightly inside the hole
             // so that it doesnt cause triangle intersections
+
+            // continue;
 
             std::cout << "Non triangle hole" << std::endl;
             nonTriangleHoles++;
@@ -852,19 +864,23 @@ void Mesh::repairMesh()
             // move this centre coordinate slightly inside the hole
             // so that it doesnt cause triangle intersections
 
+            std::cout << "Centre of mass: " << centre.x << " " << centre.y << " " << centre.z << std::endl;
+
+
             centre = centre + (centre - this->vertices[hole[0]]) * 0.1;
 
-            // std::cout << "Centre of mass: " << centre.x << " " << centre.y << " " << centre.z << std::endl;
+            std::cout << "Centre of mass moved slightly: " << centre.x << " " << centre.y << " " << centre.z << std::endl;
             // Cartesian3 centre = Cartesian3(4, 4, 4);
+
             this->vertices.push_back(centre);
             this->numUniqueVertices++;
 
             // std::set<int> visitedVertices;
 
             // make new faces with the centre and the vertices of each edge
-            for (int i = 0; i < hole.size(); i++)
+            for (int edgeIndex : hole)
             {
-                DirectedEdges edge = this->directedEdges[hole[i]];
+                DirectedEdges edge = this->directedEdges[edgeIndex];
 
                 // std::cout << "Edge " << hole[i] << " from: " << edge.from << " to: " << edge.to << std::endl;
                 int vertex0 = edge.from;
@@ -874,34 +890,34 @@ void Mesh::repairMesh()
                 this->faces.push_back({vertex0, vertex1, vertex2});
                 this->numFaces++;
 
-                // std::cout << "Face " << this->numFaces - 1 << " " << vertex0 << " " << vertex1 << " " << vertex2 << std::endl;
+                // std::cout << "Centre Face " << this->numFaces - 1 << " " << vertex0 << " " << vertex1 << " " << vertex2 << std::endl;
             }
+            // this->directedEdges.clear();
+            // this->firstDirectedEdges.clear();
+            // this->otherHalfs.clear();
+            //
+            // computeDirectedEdges();
+            // computeFirstDirectedEdges();
+            // computeOtherHalfs();
 
-            this->directedEdges.clear();
-            this->firstDirectedEdges.clear();
-            this->otherHalfs.clear();
-
-            computeDirectedEdges();
-            computeFirstDirectedEdges();
-            computeOtherHalfs();
         }
+        // this->directedEdges.clear();
+        // this->firstDirectedEdges.clear();
+        // this->otherHalfs.clear();
+        //
+        // computeDirectedEdges();
+        // computeFirstDirectedEdges();
+        // computeOtherHalfs();
     }
 
-    // removeRepeatedFaces();
-    // removeEqualEdges();
+    // time at this moment
+    auto end = std::chrono::high_resolution_clock::now();
 
-    // this->directedEdges.clear();
-    // this->firstDirectedEdges.clear();
-    // this->otherHalfs.clear();
+    // calculate the time taken in seconds
+    std::chrono::duration<double> timeTaken = end - start;
 
-    std::cout << "Non Triangle holes: " << nonTriangleHoles << std::endl;
-
-    // computeDirectedEdges();
-    // computeFirstDirectedEdges();
-    // computeOtherHalfs();
-
-    // printDirectedEdges();
-    // printOtherHalfs();
+    // print the time taken to repair mesh
+    std::cout << "Time taken to repair mesh: " << timeTaken.count() << " seconds" << std::endl;
 }
 
 
