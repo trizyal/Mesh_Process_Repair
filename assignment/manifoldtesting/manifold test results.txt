@@ -1,0 +1,109 @@
+Manifold Tests 
+
+2ballout.tri
+The mesh is 2-manifold
+Genus of the mesh is: 0
+
+2torus.tri
+The mesh is 2-manifold
+Genus of the mesh is: 1
+
+5bout.tri
+The mesh is 2-manifold
+Genus of the mesh is: 1
+
+747.tri
+The mesh is not 2-manifold
+Edge 30 fails
+
+biplane.tri
+The mesh is not 2-manifold
+Edge 123 fails
+
+bitorus.tri
+The mesh is 2-manifold
+Genus of the mesh is: 2
+
+cherrytree.tri
+The mesh is not 2-manifold
+Edge 1 fails
+
+cow.tri
+The mesh is not 2-manifold
+Edge 230 fails
+
+cube.tri
+The mesh is 2-manifold
+Genus of the mesh is: 0
+
+dodecahedron.tri
+The mesh is 2-manifold
+Genus of the mesh is: 0
+
+fuelinject.tri 
+The mesh is not 2-manifold
+Vertex 251 fails
+
+hamish_40k_edit.tri
+The mesh is not 2-manifold
+Edge 1 fails
+
+hamish_40k_edit_2.tri
+The mesh is not 2-manifold
+Edge 1166 fails
+
+Hamish.tri
+The mesh is not 2-manifold
+Edge 551 fails
+
+hexahedron.tri
+The mesh is 2-manifold
+Genus of the mesh is: 0
+
+horse.tri
+The mesh is 2-manifold
+Genus of the mesh is: 0
+
+icosahedron.tri
+The mesh is 2-manifold
+Genus of the mesh is: 0
+
+legoman.tri
+The mesh is not 2-manifold
+Edge 147
+
+many.tri
+The mesh is 2-manifold
+Genus of the mesh is: 0
+
+octahedron.tri
+The mesh is 2-manifold
+Genus of the mesh is: 0
+
+quadtorus.tri
+The mesh is 2-manifold
+Genus of the mesh is: 4
+
+skeleton.tri
+The mesh is not 2-manifold
+Edge 1053 fails
+
+tetrahedron.tri
+The mesh is 2-manifold
+Genus of the mesh is: 0
+
+tetrahedron_bad.tri
+The mesh is not 2-manifold
+Vertex 0 fails
+
+torus.tri
+The mesh is 2-manifold
+Genus of the mesh is: 1
+
+tritorus.tri
+The mesh is 2-manifold
+Genus of the mesh is: 3
+
+yoda.tri
+The mesh is not 2-manifold
+Edge 0

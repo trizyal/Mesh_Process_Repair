@@ -53,6 +53,9 @@ int main(int argc, char *argv[])
     mesh.saveFaceFile(std::move(outfile));
     outfile.close();
 
+    std::cout<<"File saved successfully"<<std::endl;
+
+/*
     filename = "objfiles/" + obj_name + ".obj";
 
     output_dir = "objfiles";
@@ -68,6 +71,7 @@ int main(int argc, char *argv[])
 
     mesh.saveObjFile(std::move(outfile_obj));
     outfile_obj.close();
+*/
 
     return 0;
 }

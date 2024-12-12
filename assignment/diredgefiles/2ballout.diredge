@@ -1,0 +1,96 @@
+# University of Leeds 2024-2025
+# COMP 5893M Assignment 1
+# Student Name: Tejaswa Rizyal
+# Student Number: 201484983
+#
+# Object Name: 2ballout
+# Vertices=12 Faces=16
+#
+Vertex 0: 1 2 4.9314
+Vertex 1: 1.9314 2 4
+Vertex 2: 1 2.9314 4
+Vertex 3: 0.0686 2 4
+Vertex 4: 1 1.0686 4
+Vertex 5: 1 2 3.0686
+Vertex 6: 1 2 2.9314
+Vertex 7: 1.9314 2 2
+Vertex 8: 1 2.9314 2
+Vertex 9: 0.0686 2 2
+Vertex 10: 1 1.0686 2
+Vertex 11: 1 2 1.0686
+FirstDirectedEdge 0 0
+FirstDirectedEdge 1 1
+FirstDirectedEdge 2 2
+FirstDirectedEdge 3 5
+FirstDirectedEdge 4 6
+FirstDirectedEdge 5 11
+FirstDirectedEdge 6 24
+FirstDirectedEdge 7 25
+FirstDirectedEdge 8 26
+FirstDirectedEdge 9 29
+FirstDirectedEdge 10 30
+FirstDirectedEdge 11 35
+Face 0: 0 1 2
+Face 1: 0 2 3
+Face 2: 4 1 0
+Face 3: 2 1 5
+Face 4: 0 3 4
+Face 5: 2 5 3
+Face 6: 5 1 4
+Face 7: 3 5 4
+Face 8: 6 7 8
+Face 9: 6 8 9
+Face 10: 10 7 6
+Face 11: 8 7 11
+Face 12: 6 9 10
+Face 13: 8 11 9
+Face 14: 11 7 10
+Face 15: 9 11 10
+OtherHalf 0 7
+OtherHalf 1 9
+OtherHalf 2 3
+OtherHalf 3 2
+OtherHalf 4 17
+OtherHalf 5 12
+OtherHalf 6 19
+OtherHalf 7 0
+OtherHalf 8 14
+OtherHalf 9 1
+OtherHalf 10 18
+OtherHalf 11 15
+OtherHalf 12 5
+OtherHalf 13 23
+OtherHalf 14 8
+OtherHalf 15 11
+OtherHalf 16 21
+OtherHalf 17 4
+OtherHalf 18 10
+OtherHalf 19 6
+OtherHalf 20 22
+OtherHalf 21 16
+OtherHalf 22 20
+OtherHalf 23 13
+OtherHalf 24 31
+OtherHalf 25 33
+OtherHalf 26 27
+OtherHalf 27 26
+OtherHalf 28 41
+OtherHalf 29 36
+OtherHalf 30 43
+OtherHalf 31 24
+OtherHalf 32 38
+OtherHalf 33 25
+OtherHalf 34 42
+OtherHalf 35 39
+OtherHalf 36 29
+OtherHalf 37 47
+OtherHalf 38 32
+OtherHalf 39 35
+OtherHalf 40 45
+OtherHalf 41 28
+OtherHalf 42 34
+OtherHalf 43 30
+OtherHalf 44 46
+OtherHalf 45 40
+OtherHalf 46 44
+OtherHalf 47 37

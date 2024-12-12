@@ -1,0 +1,3 @@
+# Manifold testing results for octahedron.tri
+
+The mesh is 2-manifold

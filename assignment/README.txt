@@ -2,9 +2,53 @@
 # COMP 5893M Modelling and Animation
 # Assignment 1
 
-build instructions:
-    - run 'make' in each of the subdirectories to build the executables.
-    - run 'make clean' in each of the subdirectories to clean the executables.
+
+
+
+Build instructions:
+
+
+    - in the 'assignment' directory run: 
+        [userid@machine assignment]$ cmake .
+        [userid@machine assignment]$ make
+        this should build each of the executable needed for the assignment
+    
+    - TASK 1
+        run:
+        [userid@machine assignment]$ ./face2faceindex/face2faceindex {input.tri}
+        [userid@machine assignment]$ ./face2faceindex/face2faceindex ../handout_models/cube.tri
+        the output .face files are saved in the facefiles directory.
+
+        [userid@machine assignment]$ ./faceindex2directededge/faceindex2directededge {input.face}
+        [userid@machine assignment]$ ./faceindex2directededge/faceindex2directededge facefiles/cube.face
+        the output .diredge files are saved in diredgefiles directory.
+
+
+    - TASK 2
+        run:
+        [userid@machine assignment]$ ./manifoldtesting/manifoldtesting {input.tri}
+        [userid@machine assignment]$ ./manifoldtesting/manifoldtesting ../handout_models/cube.tri
+        detailed output of manifold test are stored in manifold_test_results directory.
+        and file "manifold_test_results.txt" haev the list of all the meshes with manifold test results, a edge/vertex that fails and the genus.
+
+
+    -TASK 3
+        [userid@machine assignment]$ ./eulerformulacalculation/eulerformulacalculation {input.tri}
+        [userid@machine assignment]$ ./eulerformulacalculation/eulerformulacalculation ../handout_models/torus.tri
+        this will print the genus in the terminal
+        and file "manifold_test_results.txt" have the list of all the meshes with manifold test results, a edge/vertex that fails and the genus.
+
+
+    - TASK 4
+        run:
+        [userid@machine assignment]$ ./meshrepair/meshrepair {input.tri}
+        [userid@machine assignment]$ ./meshrepair/meshrepair ../handout_models/hamish_40k_edit_2.tri
+        the repaired .tri file is saved in trifiles directory with the suffix '_repaired' 
+        we also save the .obj file in the objfiles with the same suffix.
+
+
+
+
 
 
 

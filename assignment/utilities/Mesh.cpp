@@ -48,13 +48,13 @@ void Mesh::readTriFile(std::ifstream input_file)
         this->numFaces++;
     }
     this->numTriangles = this->numFaces;
-    std::cout << "File read successfully" << std::endl;
+    // std::cout << "File read successfully" << std::endl;
     computeDirectedEdges();
-    std::cout << "Directed Edges computed successfully" << std::endl;
+    // std::cout << "Directed Edges computed successfully" << std::endl;
     computeFirstDirectedEdges();
-    std::cout << "First Directed Edges computed successfully" << std::endl;
+    // std::cout << "First Directed Edges computed successfully" << std::endl;
     computeOtherHalfs();
-    std::cout << "Other Halfs computed successfully" << std::endl;
+    // std::cout << "Other Halfs computed successfully" << std::endl;
 }
 
 
@@ -100,7 +100,7 @@ void Mesh::readFaceFile(std::ifstream input_file)
     this->numUniqueVertices = numVertices;
     this->numFaces = numFaces;
 
-    std::cout << "File read successfully" << std::endl;
+    // std::cout << "File read successfully" << std::endl;
     computeDirectedEdges();
     std::cout << "Directed Edges computed successfully" << std::endl;
     computeFirstDirectedEdges();
@@ -751,6 +751,8 @@ void Mesh::repairMesh()
     removeRepeatedFaces();
     // removeEqualEdges();
 
+    
+
     // TODO: function to remove intersecting faces
 
     this->directedEdges.clear();
@@ -771,6 +773,7 @@ void Mesh::repairMesh()
 
     // printDirectedEdges();
     // printOtherHalfs();
+    
 
     std::vector<std::vector<int>> holes = getHoles();
 
@@ -814,7 +817,7 @@ void Mesh::repairMesh()
 
             this->faces.push_back({vertex0, vertex1, vertex2});
             this->numFaces++;
-            std::cout << "Triangle Face " << this->numFaces - 1 << " " << vertex0 << " " << vertex1 << " " << vertex2 << std::endl;
+            // std::cout << "Triangle Face " << this->numFaces - 1 << " " << vertex0 << " " << vertex1 << " " << vertex2 << std::endl;
 
 
             // this->directedEdges.clear();
@@ -834,7 +837,7 @@ void Mesh::repairMesh()
 
             // continue;
 
-            std::cout << "Non triangle hole" << std::endl;
+            // std::cout << "Non triangle hole" << std::endl;
             nonTriangleHoles++;
 
             // get all the vertices of the hole
@@ -871,7 +874,7 @@ void Mesh::repairMesh()
             // Cartesian3 vertex = this->vertices[v];
             // centre = centre + (centre - vertex) * 0.1;
 
-            std::cout << "Centre of mass moved slightly: " << centre.x << " " << centre.y << " " << centre.z << std::endl;
+            // std::cout << "Centre of mass moved slightly: " << centre.x << " " << centre.y << " " << centre.z << std::endl;
             // Cartesian3 centre = Cartesian3(4, 4, 4);
 
             this->vertices.push_back(centre);
@@ -1151,9 +1154,14 @@ int Mesh::saveManifoldTestResults(std::ofstream output_file)
     std::vector<int> nonManifoldVertices = vertexManifoldTest();
 
     if (nonManifoldEdges.empty() && nonManifoldVertices.empty())
+    { 
+        std::cout << "\nThe mesh is 2-manifold" << std::endl;
         output_file << "\nThe mesh is 2-manifold" << std::endl;
+    }
     else
     {
+         std::cout << "\nThe mesh is not 2-manifold" << std::endl;
+         std::cout << "Check the manifold_test_results directory for details." << std::endl;
         output_file << "The mesh is not 2-manifold" << std::endl;
         output_file << "Non manifold edges and vertices: " << std::endl;
         for (const int edge : nonManifoldEdges)
@@ -1186,6 +1194,7 @@ int Mesh::saveRepairedMesh(std::ofstream output_file) const
         output_file << this->vertices[face.vertex[1]].x << " " << this->vertices[face.vertex[1]].y << " " << this->vertices[face.vertex[1]].z << std::endl;
         output_file << this->vertices[face.vertex[2]].x << " " << this->vertices[face.vertex[2]].y << " " << this->vertices[face.vertex[2]].z << std::endl;
     }
+
     return 0;
 }
 

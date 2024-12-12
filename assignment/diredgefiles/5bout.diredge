@@ -1,0 +1,648 @@
+# University of Leeds 2024-2025
+# COMP 5893M Assignment 1
+# Student Name: Tejaswa Rizyal
+# Student Number: 201484983
+#
+# Object Name: 5bout
+# Vertices=64 Faces=128
+#
+Vertex 0: 2 0.66 1
+Vertex 1: 3 0.569 2
+Vertex 2: 2 0.99 2
+Vertex 3: 3 0.5103 1
+Vertex 4: 1 0.5 1
+Vertex 5: 1 0.55 2
+Vertex 6: 3 0.6037 3
+Vertex 7: 2 0.7615 3
+Vertex 8: 2 1 0.66
+Vertex 9: 3 1 0.5103
+Vertex 10: 3.4897 1 1
+Vertex 11: 3.431 1 2
+Vertex 12: 0.55 1 2
+Vertex 13: 0.5 1 1
+Vertex 14: 1 0.5824 3
+Vertex 15: 1 1 0.5
+Vertex 16: 3 1 3.3963
+Vertex 17: 2 1 3.2385
+Vertex 18: 3.3963 1 3
+Vertex 19: 2 2 0.9
+Vertex 20: 3 2 0.538
+Vertex 21: 3.3571 2 2
+Vertex 22: 3.462 2 1
+Vertex 23: 0.521 2 1
+Vertex 24: 0.6187 2 2
+Vertex 25: 0.5824 1 3
+Vertex 26: 1 1 3.4176
+Vertex 27: 1 2 0.521
+Vertex 28: 2 1.775 3
+Vertex 29: 2.0957 2 3
+Vertex 30: 3 2 3.462
+Vertex 31: 3.462 2 3
+Vertex 32: 2 3 0.825
+Vertex 33: 3 3 0.6037
+Vertex 34: 3.431 3 2
+Vertex 35: 3.3963 3 1
+Vertex 36: 0.521 2 3
+Vertex 37: 0.5824 3 1
+Vertex 38: 0.55 3 2
+Vertex 39: 1.91 2 3
+Vertex 40: 1 2 3.479
+Vertex 41: 1 3 0.5824
+Vertex 42: 2.5564 2 2
+Vertex 43: 2 1.0143 2
+Vertex 44: 3 3 3.4897
+Vertex 45: 2 2.18 3
+Vertex 46: 2 3 3.2929
+Vertex 47: 3.4897 3 3
+Vertex 48: 2 3.175 1
+Vertex 49: 3 3.3963 1
+Vertex 50: 3 3.431 2
+Vertex 51: 0.5 3 3
+Vertex 52: 1 3.45 2
+Vertex 53: 1 3.4176 1
+Vertex 54: 1 3 3.5
+Vertex 55: 1.4692 2 2
+Vertex 56: 2.2021 3 2
+Vertex 57: 2 3 2.3167
+Vertex 58: 2 2 1.1375
+Vertex 59: 3 3.4897 3
+Vertex 60: 2 3.2929 3
+Vertex 61: 2 3 1.525
+Vertex 62: 1 3.5 3
+Vertex 63: 1.81 3 2
+FirstDirectedEdge 0 0
+FirstDirectedEdge 1 1
+FirstDirectedEdge 2 2
+FirstDirectedEdge 3 4
+FirstDirectedEdge 4 6
+FirstDirectedEdge 5 8
+FirstDirectedEdge 6 13
+FirstDirectedEdge 7 14
+FirstDirectedEdge 8 18
+FirstDirectedEdge 9 21
+FirstDirectedEdge 10 25
+FirstDirectedEdge 11 26
+FirstDirectedEdge 12 31
+FirstDirectedEdge 13 32
+FirstDirectedEdge 14 38
+FirstDirectedEdge 15 42
+FirstDirectedEdge 16 49
+FirstDirectedEdge 17 50
+FirstDirectedEdge 18 56
+FirstDirectedEdge 19 60
+FirstDirectedEdge 20 64
+FirstDirectedEdge 21 70
+FirstDirectedEdge 22 73
+FirstDirectedEdge 23 79
+FirstDirectedEdge 24 82
+FirstDirectedEdge 25 85
+FirstDirectedEdge 26 92
+FirstDirectedEdge 27 96
+FirstDirectedEdge 28 103
+FirstDirectedEdge 29 106
+FirstDirectedEdge 30 109
+FirstDirectedEdge 31 115
+FirstDirectedEdge 32 120
+FirstDirectedEdge 33 124
+FirstDirectedEdge 34 133
+FirstDirectedEdge 35 136
+FirstDirectedEdge 36 148
+FirstDirectedEdge 37 151
+FirstDirectedEdge 38 154
+FirstDirectedEdge 39 160
+FirstDirectedEdge 40 161
+FirstDirectedEdge 41 168
+FirstDirectedEdge 42 176
+FirstDirectedEdge 43 179
+FirstDirectedEdge 44 186
+FirstDirectedEdge 45 190
+FirstDirectedEdge 46 193
+FirstDirectedEdge 47 196
+FirstDirectedEdge 48 201
+FirstDirectedEdge 49 204
+FirstDirectedEdge 50 216
+FirstDirectedEdge 51 235
+FirstDirectedEdge 52 238
+FirstDirectedEdge 53 239
+FirstDirectedEdge 54 243
+FirstDirectedEdge 55 253
+FirstDirectedEdge 56 266
+FirstDirectedEdge 57 268
+FirstDirectedEdge 58 273
+FirstDirectedEdge 59 283
+FirstDirectedEdge 60 284
+FirstDirectedEdge 61 298
+FirstDirectedEdge 62 316
+FirstDirectedEdge 63 325
+Face 0: 0 1 2
+Face 1: 0 3 1
+Face 2: 4 2 5
+Face 3: 4 0 2
+Face 4: 2 6 7
+Face 5: 2 1 6
+Face 6: 8 3 0
+Face 7: 9 3 8
+Face 8: 1 10 11
+Face 9: 3 10 1
+Face 10: 4 12 13
+Face 11: 5 12 4
+Face 12: 5 7 14
+Face 13: 5 2 7
+Face 14: 15 0 4
+Face 15: 8 0 15
+Face 16: 7 16 17
+Face 17: 6 16 7
+Face 18: 6 11 18
+Face 19: 1 11 6
+Face 20: 19 9 8
+Face 21: 19 20 9
+Face 22: 9 10 3
+Face 23: 10 21 11
+Face 24: 10 22 21
+Face 25: 13 15 4
+Face 26: 12 23 13
+Face 27: 12 24 23
+Face 28: 5 25 12
+Face 29: 14 25 5
+Face 30: 14 17 26
+Face 31: 7 17 14
+Face 32: 27 8 15
+Face 33: 27 19 8
+Face 34: 16 28 17
+Face 35: 16 29 28
+Face 36: 16 30 29
+Face 37: 6 18 16
+Face 38: 11 31 18
+Face 39: 11 21 31
+Face 40: 32 20 19
+Face 41: 32 33 20
+Face 42: 9 22 10
+Face 43: 20 22 9
+Face 44: 22 34 21
+Face 45: 22 35 34
+Face 46: 13 27 15
+Face 47: 23 27 13
+Face 48: 25 24 12
+Face 49: 25 36 24
+Face 50: 24 37 23
+Face 51: 24 38 37
+Face 52: 26 25 14
+Face 53: 26 39 40
+Face 54: 26 28 39
+Face 55: 26 17 28
+Face 56: 41 19 27
+Face 57: 41 32 19
+Face 58: 28 29 42
+Face 59: 28 42 43
+Face 60: 30 18 31
+Face 61: 16 18 30
+Face 62: 44 29 30
+Face 63: 44 45 29
+Face 64: 44 46 45
+Face 65: 21 47 31
+Face 66: 21 34 47
+Face 67: 48 33 32
+Face 68: 49 33 48
+Face 69: 20 35 22
+Face 70: 33 35 20
+Face 71: 49 34 35
+Face 72: 50 34 49
+Face 73: 23 41 27
+Face 74: 37 41 23
+Face 75: 26 36 25
+Face 76: 40 36 26
+Face 77: 36 38 24
+Face 78: 36 51 38
+Face 79: 37 52 53
+Face 80: 38 52 37
+Face 81: 54 45 46
+Face 82: 54 39 45
+Face 83: 54 40 39
+Face 84: 43 55 39
+Face 85: 43 39 28
+Face 86: 53 32 41
+Face 87: 48 32 53
+Face 88: 42 29 56
+Face 89: 29 57 56
+Face 90: 29 45 57
+Face 91: 58 43 42
+Face 92: 44 31 47
+Face 93: 30 31 44
+Face 94: 46 59 60
+Face 95: 44 59 46
+Face 96: 50 47 34
+Face 97: 59 47 50
+Face 98: 49 56 50
+Face 99: 49 61 56
+Face 100: 49 48 61
+Face 101: 49 35 33
+Face 102: 53 41 37
+Face 103: 40 51 36
+Face 104: 54 51 40
+Face 105: 38 62 52
+Face 106: 51 62 38
+Face 107: 53 61 48
+Face 108: 53 63 61
+Face 109: 53 52 63
+Face 110: 54 60 62
+Face 111: 46 60 54
+Face 112: 55 63 39
+Face 113: 63 45 39
+Face 114: 63 57 45
+Face 115: 55 43 58
+Face 116: 58 42 56
+Face 117: 58 56 61
+Face 118: 59 57 60
+Face 119: 59 56 57
+Face 120: 59 50 56
+Face 121: 44 47 59
+Face 122: 54 62 51
+Face 123: 62 63 52
+Face 124: 62 57 63
+Face 125: 62 60 57
+Face 126: 55 58 61
+Face 127: 55 61 63
+OtherHalf 0 5
+OtherHalf 1 15
+OtherHalf 2 10
+OtherHalf 3 19
+OtherHalf 4 29
+OtherHalf 5 0
+OtherHalf 6 11
+OtherHalf 7 39
+OtherHalf 8 35
+OtherHalf 9 43
+OtherHalf 10 2
+OtherHalf 11 6
+OtherHalf 12 17
+OtherHalf 13 53
+OtherHalf 14 40
+OtherHalf 15 1
+OtherHalf 16 59
+OtherHalf 17 12
+OtherHalf 18 22
+OtherHalf 19 3
+OtherHalf 20 45
+OtherHalf 21 68
+OtherHalf 22 18
+OtherHalf 23 61
+OtherHalf 24 28
+OtherHalf 25 71
+OtherHalf 26 57
+OtherHalf 27 67
+OtherHalf 28 24
+OtherHalf 29 4
+OtherHalf 30 34
+OtherHalf 31 80
+OtherHalf 32 77
+OtherHalf 33 86
+OtherHalf 34 30
+OtherHalf 35 8
+OtherHalf 36 41
+OtherHalf 37 95
+OtherHalf 38 89
+OtherHalf 39 7
+OtherHalf 40 14
+OtherHalf 41 36
+OtherHalf 42 46
+OtherHalf 43 9
+OtherHalf 44 76
+OtherHalf 45 20
+OtherHalf 46 42
+OtherHalf 47 97
+OtherHalf 48 52
+OtherHalf 49 104
+OtherHalf 50 93
+OtherHalf 51 113
+OtherHalf 52 48
+OtherHalf 53 13
+OtherHalf 54 58
+OtherHalf 55 116
+OtherHalf 56 111
+OtherHalf 57 26
+OtherHalf 58 54
+OtherHalf 59 16
+OtherHalf 60 65
+OtherHalf 61 23
+OtherHalf 62 100
+OtherHalf 63 121
+OtherHalf 64 131
+OtherHalf 65 60
+OtherHalf 66 128
+OtherHalf 67 27
+OtherHalf 68 21
+OtherHalf 69 74
+OtherHalf 70 117
+OtherHalf 71 25
+OtherHalf 72 127
+OtherHalf 73 134
+OtherHalf 74 69
+OtherHalf 75 140
+OtherHalf 76 44
+OtherHalf 77 32
+OtherHalf 78 83
+OtherHalf 79 143
+OtherHalf 80 31
+OtherHalf 81 145
+OtherHalf 82 152
+OtherHalf 83 78
+OtherHalf 84 88
+OtherHalf 85 146
+OtherHalf 86 33
+OtherHalf 87 157
+OtherHalf 88 84
+OtherHalf 89 38
+OtherHalf 90 94
+OtherHalf 91 165
+OtherHalf 92 158
+OtherHalf 93 50
+OtherHalf 94 90
+OtherHalf 95 37
+OtherHalf 96 101
+OtherHalf 97 47
+OtherHalf 98 139
+OtherHalf 99 169
+OtherHalf 100 62
+OtherHalf 101 96
+OtherHalf 102 107
+OtherHalf 103 166
+OtherHalf 104 49
+OtherHalf 105 110
+OtherHalf 106 174
+OtherHalf 107 102
+OtherHalf 108 185
+OtherHalf 109 187
+OtherHalf 110 105
+OtherHalf 111 56
+OtherHalf 112 183
+OtherHalf 113 51
+OtherHalf 114 119
+OtherHalf 115 181
+OtherHalf 116 55
+OtherHalf 117 70
+OtherHalf 118 197
+OtherHalf 119 114
+OtherHalf 120 125
+OtherHalf 121 63
+OtherHalf 122 172
+OtherHalf 123 202
+OtherHalf 124 212
+OtherHalf 125 120
+OtherHalf 126 130
+OtherHalf 127 72
+OtherHalf 128 66
+OtherHalf 129 209
+OtherHalf 130 126
+OtherHalf 131 64
+OtherHalf 132 137
+OtherHalf 133 198
+OtherHalf 134 73
+OtherHalf 135 208
+OtherHalf 136 214
+OtherHalf 137 132
+OtherHalf 138 142
+OtherHalf 139 98
+OtherHalf 140 75
+OtherHalf 141 221
+OtherHalf 142 138
+OtherHalf 143 79
+OtherHalf 144 149
+OtherHalf 145 81
+OtherHalf 146 85
+OtherHalf 147 226
+OtherHalf 148 233
+OtherHalf 149 144
+OtherHalf 150 155
+OtherHalf 151 224
+OtherHalf 152 82
+OtherHalf 153 232
+OtherHalf 154 242
+OtherHalf 155 150
+OtherHalf 156 227
+OtherHalf 157 87
+OtherHalf 158 92
+OtherHalf 159 164
+OtherHalf 160 250
+OtherHalf 161 230
+OtherHalf 162 167
+OtherHalf 163 256
+OtherHalf 164 159
+OtherHalf 165 91
+OtherHalf 166 103
+OtherHalf 167 162
+OtherHalf 168 173
+OtherHalf 169 99
+OtherHalf 170 220
+OtherHalf 171 259
+OtherHalf 172 122
+OtherHalf 173 168
+OtherHalf 174 106
+OtherHalf 175 264
+OtherHalf 176 177
+OtherHalf 177 176
+OtherHalf 178 274
+OtherHalf 179 257
+OtherHalf 180 184
+OtherHalf 181 115
+OtherHalf 182 279
+OtherHalf 183 112
+OtherHalf 184 180
+OtherHalf 185 108
+OtherHalf 186 191
+OtherHalf 187 109
+OtherHalf 188 281
+OtherHalf 189 194
+OtherHalf 190 270
+OtherHalf 191 186
+OtherHalf 192 287
+OtherHalf 193 244
+OtherHalf 194 189
+OtherHalf 195 200
+OtherHalf 196 277
+OtherHalf 197 118
+OtherHalf 198 133
+OtherHalf 199 289
+OtherHalf 200 195
+OtherHalf 201 205
+OtherHalf 202 123
+OtherHalf 203 261
+OtherHalf 204 305
+OtherHalf 205 201
+OtherHalf 206 300
+OtherHalf 207 211
+OtherHalf 208 135
+OtherHalf 209 129
+OtherHalf 210 304
+OtherHalf 211 207
+OtherHalf 212 124
+OtherHalf 213 217
+OtherHalf 214 136
+OtherHalf 215 303
+OtherHalf 216 290
+OtherHalf 217 213
+OtherHalf 218 296
+OtherHalf 219 223
+OtherHalf 220 170
+OtherHalf 221 141
+OtherHalf 222 307
+OtherHalf 223 219
+OtherHalf 224 151
+OtherHalf 225 229
+OtherHalf 226 147
+OtherHalf 227 156
+OtherHalf 228 311
+OtherHalf 229 225
+OtherHalf 230 161
+OtherHalf 231 236
+OtherHalf 232 153
+OtherHalf 233 148
+OtherHalf 234 310
+OtherHalf 235 320
+OtherHalf 236 231
+OtherHalf 237 241
+OtherHalf 238 327
+OtherHalf 239 308
+OtherHalf 240 317
+OtherHalf 241 237
+OtherHalf 242 154
+OtherHalf 243 248
+OtherHalf 244 193
+OtherHalf 245 335
+OtherHalf 246 251
+OtherHalf 247 340
+OtherHalf 248 243
+OtherHalf 249 314
+OtherHalf 250 160
+OtherHalf 251 246
+OtherHalf 252 345
+OtherHalf 253 338
+OtherHalf 254 255
+OtherHalf 255 254
+OtherHalf 256 163
+OtherHalf 257 179
+OtherHalf 258 262
+OtherHalf 259 171
+OtherHalf 260 306
+OtherHalf 261 203
+OtherHalf 262 258
+OtherHalf 263 323
+OtherHalf 264 175
+OtherHalf 265 269
+OtherHalf 266 349
+OtherHalf 267 272
+OtherHalf 268 358
+OtherHalf 269 265
+OtherHalf 270 190
+OtherHalf 271 343
+OtherHalf 272 267
+OtherHalf 273 346
+OtherHalf 274 178
+OtherHalf 275 348
+OtherHalf 276 280
+OtherHalf 277 196
+OtherHalf 278 363
+OtherHalf 279 182
+OtherHalf 280 276
+OtherHalf 281 188
+OtherHalf 282 286
+OtherHalf 283 356
+OtherHalf 284 333
+OtherHalf 285 365
+OtherHalf 286 282
+OtherHalf 287 192
+OtherHalf 288 292
+OtherHalf 289 199
+OtherHalf 290 216
+OtherHalf 291 364
+OtherHalf 292 288
+OtherHalf 293 360
+OtherHalf 294 299
+OtherHalf 295 361
+OtherHalf 296 218
+OtherHalf 297 302
+OtherHalf 298 352
+OtherHalf 299 294
+OtherHalf 300 206
+OtherHalf 301 322
+OtherHalf 302 297
+OtherHalf 303 215
+OtherHalf 304 210
+OtherHalf 305 204
+OtherHalf 306 260
+OtherHalf 307 222
+OtherHalf 308 239
+OtherHalf 309 313
+OtherHalf 310 234
+OtherHalf 311 228
+OtherHalf 312 368
+OtherHalf 313 309
+OtherHalf 314 249
+OtherHalf 315 319
+OtherHalf 316 371
+OtherHalf 317 240
+OtherHalf 318 367
+OtherHalf 319 315
+OtherHalf 320 235
+OtherHalf 321 326
+OtherHalf 322 301
+OtherHalf 323 263
+OtherHalf 324 329
+OtherHalf 325 382
+OtherHalf 326 321
+OtherHalf 327 238
+OtherHalf 328 370
+OtherHalf 329 324
+OtherHalf 330 334
+OtherHalf 331 375
+OtherHalf 332 366
+OtherHalf 333 284
+OtherHalf 334 330
+OtherHalf 335 245
+OtherHalf 336 383
+OtherHalf 337 341
+OtherHalf 338 253
+OtherHalf 339 344
+OtherHalf 340 247
+OtherHalf 341 337
+OtherHalf 342 373
+OtherHalf 343 271
+OtherHalf 344 339
+OtherHalf 345 252
+OtherHalf 346 273
+OtherHalf 347 378
+OtherHalf 348 275
+OtherHalf 349 266
+OtherHalf 350 351
+OtherHalf 351 350
+OtherHalf 352 298
+OtherHalf 353 379
+OtherHalf 354 359
+OtherHalf 355 376
+OtherHalf 356 283
+OtherHalf 357 362
+OtherHalf 358 268
+OtherHalf 359 354
+OtherHalf 360 293
+OtherHalf 361 295
+OtherHalf 362 357
+OtherHalf 363 278
+OtherHalf 364 291
+OtherHalf 365 285
+OtherHalf 366 332
+OtherHalf 367 318
+OtherHalf 368 312
+OtherHalf 369 374
+OtherHalf 370 328
+OtherHalf 371 316
+OtherHalf 372 377
+OtherHalf 373 342
+OtherHalf 374 369
+OtherHalf 375 331
+OtherHalf 376 355
+OtherHalf 377 372
+OtherHalf 378 347
+OtherHalf 379 353
+OtherHalf 380 381
+OtherHalf 381 380
+OtherHalf 382 325
+OtherHalf 383 336

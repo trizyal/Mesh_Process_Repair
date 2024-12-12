@@ -1,0 +1,192 @@
+# University of Leeds 2024-2025
+# COMP 5893M Assignment 1
+# Student Name: Tejaswa Rizyal
+# Student Number: 201484983
+#
+# Object Name: dodecahedron
+# Vertices=20 Faces=36
+#
+Vertex 0: 1 1 1
+Vertex 1: 0.618 1.618 0
+Vertex 2: -0.618 1.618 0
+Vertex 3: -1 1 1
+Vertex 4: 0 0.618 1.618
+Vertex 5: 1.618 0 0.618
+Vertex 6: 1.618 0 -0.618
+Vertex 7: 1 1 -1
+Vertex 8: 0 -0.618 1.618
+Vertex 9: 1 -1 1
+Vertex 10: -1.618 0 0.618
+Vertex 11: -1 -1 1
+Vertex 12: -1.618 0 -0.618
+Vertex 13: -1 1 -1
+Vertex 14: 0 0.618 -1.618
+Vertex 15: -0.618 -1.618 0
+Vertex 16: 0.618 -1.618 0
+Vertex 17: 1 -1 -1
+Vertex 18: 0 -0.618 -1.618
+Vertex 19: -1 -1 -1
+FirstDirectedEdge 0 0
+FirstDirectedEdge 1 1
+FirstDirectedEdge 2 2
+FirstDirectedEdge 3 5
+FirstDirectedEdge 4 8
+FirstDirectedEdge 5 11
+FirstDirectedEdge 6 14
+FirstDirectedEdge 7 17
+FirstDirectedEdge 8 19
+FirstDirectedEdge 9 20
+FirstDirectedEdge 10 27
+FirstDirectedEdge 11 28
+FirstDirectedEdge 12 36
+FirstDirectedEdge 13 44
+FirstDirectedEdge 14 53
+FirstDirectedEdge 15 56
+FirstDirectedEdge 16 59
+FirstDirectedEdge 17 65
+FirstDirectedEdge 18 73
+FirstDirectedEdge 19 81
+Face 0: 0 1 2
+Face 1: 0 2 3
+Face 2: 0 3 4
+Face 3: 1 0 5
+Face 4: 1 5 6
+Face 5: 1 6 7
+Face 6: 4 8 9
+Face 7: 4 9 5
+Face 8: 4 5 0
+Face 9: 10 11 8
+Face 10: 10 8 4
+Face 11: 10 4 3
+Face 12: 12 10 3
+Face 13: 12 3 2
+Face 14: 12 2 13
+Face 15: 13 2 1
+Face 16: 13 1 7
+Face 17: 13 7 14
+Face 18: 8 11 15
+Face 19: 8 15 16
+Face 20: 8 16 9
+Face 21: 9 16 17
+Face 22: 9 17 6
+Face 23: 9 6 5
+Face 24: 17 18 14
+Face 25: 17 14 7
+Face 26: 17 7 6
+Face 27: 19 14 18
+Face 28: 19 13 14
+Face 29: 19 12 13
+Face 30: 11 10 12
+Face 31: 11 12 19
+Face 32: 11 19 15
+Face 33: 18 17 16
+Face 34: 18 16 15
+Face 35: 18 15 19
+OtherHalf 0 9
+OtherHalf 1 46
+OtherHalf 2 3
+OtherHalf 3 2
+OtherHalf 4 40
+OtherHalf 5 6
+OtherHalf 6 5
+OtherHalf 7 34
+OtherHalf 8 26
+OtherHalf 9 0
+OtherHalf 10 25
+OtherHalf 11 12
+OtherHalf 12 11
+OtherHalf 13 70
+OtherHalf 14 15
+OtherHalf 15 14
+OtherHalf 16 79
+OtherHalf 17 49
+OtherHalf 18 31
+OtherHalf 19 62
+OtherHalf 20 21
+OtherHalf 21 20
+OtherHalf 22 71
+OtherHalf 23 24
+OtherHalf 24 23
+OtherHalf 25 10
+OtherHalf 26 8
+OtherHalf 27 90
+OtherHalf 28 54
+OtherHalf 29 30
+OtherHalf 30 29
+OtherHalf 31 18
+OtherHalf 32 33
+OtherHalf 33 32
+OtherHalf 34 7
+OtherHalf 35 37
+OtherHalf 36 91
+OtherHalf 37 35
+OtherHalf 38 39
+OtherHalf 39 38
+OtherHalf 40 4
+OtherHalf 41 42
+OtherHalf 42 41
+OtherHalf 43 45
+OtherHalf 44 88
+OtherHalf 45 43
+OtherHalf 46 1
+OtherHalf 47 48
+OtherHalf 48 47
+OtherHalf 49 17
+OtherHalf 50 51
+OtherHalf 51 50
+OtherHalf 52 76
+OtherHalf 53 85
+OtherHalf 54 28
+OtherHalf 55 98
+OtherHalf 56 57
+OtherHalf 57 56
+OtherHalf 58 103
+OtherHalf 59 60
+OtherHalf 60 59
+OtherHalf 61 63
+OtherHalf 62 19
+OtherHalf 63 61
+OtherHalf 64 100
+OtherHalf 65 66
+OtherHalf 66 65
+OtherHalf 67 80
+OtherHalf 68 69
+OtherHalf 69 68
+OtherHalf 70 13
+OtherHalf 71 22
+OtherHalf 72 99
+OtherHalf 73 82
+OtherHalf 74 75
+OtherHalf 75 74
+OtherHalf 76 52
+OtherHalf 77 78
+OtherHalf 78 77
+OtherHalf 79 16
+OtherHalf 80 67
+OtherHalf 81 86
+OtherHalf 82 73
+OtherHalf 83 107
+OtherHalf 84 89
+OtherHalf 85 53
+OtherHalf 86 81
+OtherHalf 87 94
+OtherHalf 88 44
+OtherHalf 89 84
+OtherHalf 90 27
+OtherHalf 91 36
+OtherHalf 92 93
+OtherHalf 93 92
+OtherHalf 94 87
+OtherHalf 95 96
+OtherHalf 96 95
+OtherHalf 97 106
+OtherHalf 98 55
+OtherHalf 99 72
+OtherHalf 100 64
+OtherHalf 101 102
+OtherHalf 102 101
+OtherHalf 103 58
+OtherHalf 104 105
+OtherHalf 105 104
+OtherHalf 106 97
+OtherHalf 107 83

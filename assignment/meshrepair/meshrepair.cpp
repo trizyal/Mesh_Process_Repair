@@ -51,10 +51,12 @@ int main(int argc, char *argv[])
     }
     */
 
+   
     mesh.repairMesh();
 
     std::cout << "Mesh repaired successfully for: "<< obj_name << std::endl;
 
+    /*
     std::string filename = "objfiles/" + obj_name + "_repaired.obj";
 
     std::string output_dir = "objfiles";
@@ -67,13 +69,15 @@ int main(int argc, char *argv[])
         std::cerr << "Error: could not open file " << filename << std::endl;
         return 1;
     }
+    
 
     mesh.saveObjFile(std::move(outfile_obj));
     outfile_obj.close();
+    */
 
-    filename = "trifiles/" + obj_name + "_repaired.tri";
-    output_dir = "trifiles";
-    command = "mkdir -p " + output_dir;
+    std::string filename = "trifiles/" + obj_name + "_repaired.tri";
+    std::string output_dir = "trifiles";
+    std::string command = "mkdir -p " + output_dir;
     system(command.c_str());
 
     std::ofstream outfile_tri(filename.c_str());
@@ -85,6 +89,8 @@ int main(int argc, char *argv[])
 
     mesh.saveRepairedMesh(std::move(outfile_tri));
     outfile_tri.close();
+
+    std::cout<<"File saved successfully"<<std::endl;
 
     return 0;
 }

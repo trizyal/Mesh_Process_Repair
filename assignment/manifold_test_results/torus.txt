@@ -1,0 +1,3 @@
+# Manifold testing results for torus.tri
+
+The mesh is 2-manifold

@@ -2,7 +2,6 @@
 // Created by hades on 11/29/24.
 //
 
-#include "manifoldtesting.h"
 #include "../utilities/Mesh.h"
 
 #include <iostream>
