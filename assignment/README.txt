@@ -1,19 +1,11 @@
-# University of Leeds 2024-25
-# COMP 5893M Modelling and Animation
-# Assignment 1
-
-
-
-
 Build instructions:
-
 
     - in the 'assignment' directory run: 
         [userid@machine assignment]$ cmake .
         [userid@machine assignment]$ make
         this should build each of the executable needed for the assignment
     
-    - TASK 1
+    - Calculate Face indices and directed edges
         run:
         [userid@machine assignment]$ ./face2faceindex/face2faceindex {input.tri}
         [userid@machine assignment]$ ./face2faceindex/face2faceindex ../handout_models/cube.tri
@@ -24,7 +16,7 @@ Build instructions:
         the output .diredge files are saved in diredgefiles directory.
 
 
-    - TASK 2
+    - Manifold Testing
         run:
         [userid@machine assignment]$ ./manifoldtesting/manifoldtesting {input.tri}
         [userid@machine assignment]$ ./manifoldtesting/manifoldtesting ../handout_models/cube.tri
@@ -32,22 +24,19 @@ Build instructions:
         and file "manifold_test_results.txt" haev the list of all the meshes with manifold test results, a edge/vertex that fails and the genus.
 
 
-    -TASK 3
+    - Calculate Genus
         [userid@machine assignment]$ ./eulerformulacalculation/eulerformulacalculation {input.tri}
         [userid@machine assignment]$ ./eulerformulacalculation/eulerformulacalculation ../handout_models/torus.tri
         this will print the genus in the terminal
         and file "manifold_test_results.txt" have the list of all the meshes with manifold test results, a edge/vertex that fails and the genus.
 
 
-    - TASK 4
+    - Repair Mesh
         run:
         [userid@machine assignment]$ ./meshrepair/meshrepair {input.tri}
         [userid@machine assignment]$ ./meshrepair/meshrepair ../handout_models/hamish_40k_edit_2.tri
         the repaired .tri file is saved in trifiles directory with the suffix '_repaired' 
         we also save the .obj file in the objfiles with the same suffix.
-
-
-
 
 
 
